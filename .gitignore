@@ -1,0 +1,6 @@
+/claude/
+/sql/
+/vendor/
+/writable/*
+.env
+
