@@ -41,12 +41,15 @@ class NebenkostenberechnungService
             ->join('mietvertraege mv',
                 'mv.einheit_id = e.id
                  AND mv.status = "aktiv"
-                 AND mv.deleted_at IS NULL
-                 AND mv.beginn_datum <= "' . $bis . '"
-                 AND (mv.ende_datum IS NULL OR mv.ende_datum >= "' . $von . '")',
-                'left')
+                 AND mv.deleted_at IS NULL',
+                'inner')
             ->where('e.objekt_id', $objektId)
             ->where('e.deleted_at IS NULL')
+            ->where('mv.beginn_datum <=', $bis)
+            ->groupStart()
+                ->where('mv.ende_datum IS NULL')
+                ->orWhere('mv.ende_datum >=', $von)
+            ->groupEnd()
             ->orderBy('e.bezeichnung', 'ASC')
             ->get()->getResultArray();
 
