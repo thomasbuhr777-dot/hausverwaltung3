@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><?= esc($title ?? 'Hausverwaltung') ?></title>
-
+<!--- Idee Logo dark/light mode
+<link rel="icon" media="(prefers-color-scheme: dark)" sizes="16x16" href="assets/img/icon_dark.png">
+<link rel="icon" media="(prefers-color-scheme: light)" sizes="16x16" href="assets/img/icon_light.png">
+--->
     <!-- Bootstrap + Icons -->
     <link rel="stylesheet" href="<?= base_url('css/fontawesome/css/all.css') ?>">
     <link rel="stylesheet" href="<?= base_url('css/styles.css') ?>">
@@ -33,6 +36,20 @@
         .btn-icon > i { line-height: 1; }
         .navbar .vr { align-self: stretch; }
         .footer-text {font-size:14px; }
+                .navbar .navbar-brand img {
+            max-height: 38px;
+            width: auto;
+        }
+        .navbar .navbar-tools {
+            width: 100%;
+            justify-content: flex-start;
+        }
+        @media (min-width: 992px) {
+            .navbar .navbar-tools {
+                width: auto;
+                justify-content: flex-end;
+            }
+        }
     </style>
        <style>
        
@@ -76,5 +93,3 @@
 <script  src="<?= base_url('js/main.js') ?>"></script>
 <?= $this->renderSection('scripts') ?>
  <?= view('partials/footer') ?>
-
-

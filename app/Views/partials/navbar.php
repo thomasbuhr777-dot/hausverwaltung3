@@ -5,12 +5,12 @@
                 <img src="<?= base_url('img/g_logo_vs6.png') ?>" alt="Logo">
             </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Navigation umschalten">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse pt-4" id="mainNavbar">
-                <ul class="navbar-nav me-auto">
+             <div class="collapse navbar-collapse pt-2 pt-lg-0 align-items-center" id="mainNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
                      <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Verwaltung
@@ -46,7 +46,7 @@
 
 
                 <!-- Right tools -->
-                <div class="d-flex align-items-center gap-2">
+                <div class="navbar-tools d-flex align-items-center gap-2 mt-3 mt-lg-0">
                     <div class="vr d-none d-lg-block"></div>
 
                     <!-- Theme toggle -->
