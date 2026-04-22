@@ -44,8 +44,8 @@ $errors = session('errors') ?? [];
     </div>
 <?php endif; ?>
 
-<div class="row justify-content-center">
-    <div class="col-lg-8">
+<div class="row">
+    <div class="col-lg-12">
         <div class="card border-0 shadow-sm">
             <div class="card-body p-4">
 
@@ -83,15 +83,22 @@ $errors = session('errors') ?? [];
                             </select>
                         </div>
 
-                        <div class="col-12"><hr class="my-1"></div>
+              
 
                         <!-- Eigentümer-Typeahead -->
                         <div class="col-12">
                             <label class="form-label fw-semibold">Eigentümer</label>
                             <div class="input-group">
-                                <span class="input-group-text bg-white border-end-0">
-                                    <i class="bi bi-person-fill text-muted"></i>
+                                <!--
+                                <span class="input-group-text bg-primary border-end-0">
+                                    <i class="bi bi-person-fill"></i>
                                 </span>
+                                -->
+                                  <button type="button"
+                                        class="btn btn-primary"
+                                        title="Neuen Eigentümer anlegen">
+                                    <i class="bi bi-person"></i>
+                                </button>
                                 <input type="text"
                                        id="eigentuemer_search"
                                        class="form-control border-start-0 border-end-0"
@@ -99,7 +106,7 @@ $errors = session('errors') ?? [];
                                        autocomplete="off"
                                        value="<?= esc($eigentuemer_anzeigename ?? '') ?>">
                                 <button type="button"
-                                        class="btn btn-outline-secondary"
+                                        class="btn btn-primary"
                                         data-bs-toggle="modal"
                                         data-bs-target="#modalNeueAdresse"
                                         title="Neuen Eigentümer anlegen">
@@ -118,25 +125,25 @@ $errors = session('errors') ?? [];
                                    value="<?= esc(old('eigentuemer_id', $objekt['eigentuemer_id'] ?? '')) ?>">
 
                             <div class="form-text">
-                                Tippen Sie mind. 2 Zeichen – oder legen Sie einen neuen Eigentümer an.
+                                Tippen Sie zur Suche min. 2 Zeichen – oder legen Sie einen neuen Eigentümer an.
                             </div>
                         </div>
 
-                        <div class="col-12">
-                            <hr class="my-1">
-                            <p class="text-muted small mb-0">
-                                <i class="bi bi-geo-alt-fill text-primary me-1"></i>
-                                Adresse über die Suche eingeben – die Felder werden automatisch befüllt.
-                            </p>
-                        </div>
+                  
 
                         <!-- Google Places Adresssuche -->
                         <div class="col-12">
                             <label class="form-label fw-semibold">Adresssuche</label>
                             <div class="input-group">
+                                <!--
                                 <span class="input-group-text bg-white border-end-0">
                                     <i class="bi bi-search text-muted"></i>
                                 </span>
+                                -->
+                                   <button type="button"
+                                        class="btn btn-primary">
+                                    <i class="bi bi-search"></i>
+                                </button>
                                 <input type="text"
                                        id="places_search"
                                        class="form-control border-start-0"
@@ -151,7 +158,8 @@ $errors = session('errors') ?? [];
                                 </div>
                             <?php else: ?>
                                 <div class="form-text">
-                                    Tippen Sie die Adresse ein und wählen Sie einen Vorschlag.
+                                      <i class="bi bi-geo-alt-fill text-primary me-1"></i>
+                                Adresse über die Suche eingeben – die Felder werden automatisch befüllt.
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -165,7 +173,7 @@ $errors = session('errors') ?? [];
                             <input type="text"
                                    name="strasse"
                                    id="field_strasse"
-                                   class="form-control bg-light"
+                                   class="form-control"
                                    value="<?= esc(old('strasse', $objekt['strasse'] ?? '')) ?>"
                                    readonly
                                    placeholder="Wird durch Adresssuche befüllt">
@@ -176,9 +184,8 @@ $errors = session('errors') ?? [];
                             <input type="text"
                                    name="hausnummer"
                                    id="field_hausnummer"
-                                   class="form-control bg-light"
+                                   class="form-control"
                                    value="<?= esc(old('hausnummer', $objekt['hausnummer'] ?? '')) ?>"
-                                   readonly
                                    placeholder="–">
                         </div>
 
@@ -187,7 +194,7 @@ $errors = session('errors') ?? [];
                             <input type="text"
                                    name="plz"
                                    id="field_plz"
-                                   class="form-control bg-light"
+                                   class="form-control"
                                    value="<?= esc(old('plz', $objekt['plz'] ?? '')) ?>"
                                    readonly
                                    placeholder="–">
@@ -198,7 +205,7 @@ $errors = session('errors') ?? [];
                             <input type="text"
                                    name="ort"
                                    id="field_ort"
-                                   class="form-control bg-light"
+                                   class="form-control"
                                    value="<?= esc(old('ort', $objekt['ort'] ?? '')) ?>"
                                    readonly
                                    placeholder="–">
