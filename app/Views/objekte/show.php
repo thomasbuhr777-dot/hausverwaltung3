@@ -46,7 +46,7 @@
             <i class="bi bi-plus-lg"></i> Einheit hinzufügen
         </a>
         <a href="<?= base_url("eingangsrechnungen/neu?objekt_id={$objekt['id']}") ?>"
-           class="btn btn-secondary btn-sm">
+           class="btn btn-outline-warning btn-sm">
             <i class="bi bi-receipt"></i> Rechnung zuweisen
         </a>
         <a href="<?= base_url("objekte/{$objekt['id']}/bearbeiten") ?>"
@@ -58,7 +58,7 @@
               action="<?= base_url("objekte/{$objekt['id']}/loeschen") ?>"
               onsubmit="return confirm('Objekt und alle Einheiten wirklich löschen?')">
             <?= csrf_field() ?>
-            <button type="submit" class="btn btn-outline-danger btn-sm">
+            <button type="submit" class="btn btn-outline-warning btn-sm">
                 <i class="bi bi-trash"></i>
             </button>
         </form>
@@ -118,7 +118,7 @@
     <div class="col-md-4">
         <div class="card h-100">
             <div class="card-header bg-primary fw-semibold border-bottom-0 pt-3">
-                <i class="bi bi-pie-chart-fill me-1"></i> Ausgaben <?= date('Y') ?>
+                <i class="bi bi-pie-chart me-1"></i> Ausgaben <?= date('Y') ?>
             </div>
             <div class="card-body p-0">
                 <?php if (empty($ausgaben)): ?>
@@ -144,7 +144,7 @@
 <div class="card mb-4">
     <div class="card-header bg-primary border-bottom py-3 d-flex justify-content-between align-items-center">
         <h6 class="fw-semibold mb-0">
-            <i class="bi bi-door-open-fill me-2"></i>
+            <i class="bi bi-door-open me-2"></i>
             Einheiten (<?= count($objekt['einheiten']) ?>)
         </h6>
     </div>
@@ -154,7 +154,7 @@
     <?php else: ?>
         <div class="table-responsive">
             <table class="table table-hover mb-0">
-                <thead class="table-light">
+                <thead>
                     <tr>
                         <th>Bezeichnung</th>
                         <th>Typ</th>
@@ -190,7 +190,7 @@
                         </td>
                         <td>
                             <a href="<?= base_url("einheiten/{$e['id']}") ?>"
-                               class="btn btn-sm btn-outline-primary">Details</a>
+                               class="btn btn-sm btn-primary">Details</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -207,7 +207,7 @@
             <i class="bi bi-receipt me-2"></i>Eingangsrechnungen
         </h6>
         <a href="<?= base_url("eingangsrechnungen/neu?objekt_id={$objekt['id']}") ?>"
-           class="btn btn-sm btn-secondary">
+           class="btn btn-sm btn-outline-warning">
             <i class="bi bi-plus"></i> Neue Rechnung
         </a>
     </div>
@@ -217,7 +217,7 @@
     <?php else: ?>
         <div class="table-responsive">
             <table class="table table-hover mb-0">
-                <thead class="table-light">
+                <thead>
                     <tr>
                         <th>Rechnungsnr.</th>
                         <th>Lieferant</th>
@@ -253,7 +253,7 @@
                         </td>
                         <td>
                             <a href="<?= base_url("eingangsrechnungen/{$r['id']}") ?>"
-                               class="btn btn-sm btn-outline-primary">Details</a>
+                               class="btn btn-sm btn-outline-secondary">Details</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
