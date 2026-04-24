@@ -83,12 +83,12 @@
     <?php if (! empty($ueberfaellig_rechnungen)): ?>
     <div class="col-12">
         <div class="card border-0 shadow-sm border-start border-danger border-4">
-            <div class="card-header bg-white border-bottom-0 pt-3">
-                <h6 class="fw-semibold mb-0 text-danger"><i class="bi bi-exclamation-triangle-fill me-2"></i>Überfällige Eingangsrechnungen</h6>
+            <div class="card-header bg-primary border-bottom-0 pt-3">
+                <h6 class="fw-semibold mb-0 text-warning"><i class="bi bi-exclamation-triangle-fill me-2"></i>Überfällige Eingangsrechnungen</h6>
             </div>
             <div class="card-body p-0">
                 <table class="table table-hover mb-0">
-                    <thead class="table-light">
+                    <thead>
                         <tr>
                             <th>Rechnungsnr.</th><th>Lieferant</th><th>Objekt / Einheit</th>
                             <th class="text-end">Brutto</th><th>Fällig</th><th></th>

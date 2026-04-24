@@ -9,7 +9,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-             <div class="collapse navbar-collapse pt-2 pt-lg-0 align-items-center" id="mainNavbar">
+             <div class="collapse navbar-collapse pt-2 pt-lg-3 align-items-center" id="mainNavbar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
                      <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

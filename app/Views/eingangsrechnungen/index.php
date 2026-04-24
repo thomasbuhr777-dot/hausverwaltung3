@@ -18,7 +18,7 @@
 <div class="card border-0 shadow-sm">
     <div class="table-responsive">
         <table class="table table-hover mb-0">
-            <thead class="table-light">
+            <thead>
                 <tr>
                     <th>Rechnungsnr.</th>
                     <th>Lieferant</th>
@@ -79,10 +79,10 @@
                 <?php endif; ?>
             </tbody>
             <?php if (!empty($rechnungen)): ?>
-            <tfoot class="table-light fw-bold">
+            <tfooter fw-bold">
                 <tr>
                     <td colspan="4">Summe</td>
-                    <td class="text-end"><?= number_format(array_sum(array_column($rechnungen, 'nettobetrag')), 2, ',', '.') ?> €</td>
+                    <td class="text-end">&nbsp;<?= number_format(array_sum(array_column($rechnungen, 'nettobetrag')), 2, ',', '.') ?> €</td>
                     <td class="text-end"><?= number_format(array_sum(array_column($rechnungen, 'steuerbetrag')), 2, ',', '.') ?> €</td>
                     <td class="text-end"><?= number_format(array_sum(array_column($rechnungen, 'bruttobetrag')), 2, ',', '.') ?> €</td>
                     <td colspan="4"></td>

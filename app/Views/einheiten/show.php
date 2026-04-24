@@ -19,16 +19,16 @@
     <div class="d-flex gap-2">
         <?php if ($e['status'] === 'verfuegbar'): ?>
             <a href="<?= base_url("mietvertraege/neu?einheit_id={$e['id']}") ?>"
-               class="btn btn-success btn-sm">
+               class="btn btn-primary btn-sm">
                 <i class="bi bi-file-earmark-plus me-1"></i> Mietvertrag anlegen
             </a>
         <?php endif; ?>
         <a href="<?= base_url("eingangsrechnungen/neu?einheit_id={$e['id']}") ?>"
-           class="btn btn-outline-warning btn-sm">
+           class="btn btn-warning btn-sm">
             <i class="bi bi-receipt me-1"></i> Rechnung zuweisen
         </a>
         <a href="<?= base_url("einheiten/{$e['id']}/bearbeiten") ?>"
-           class="btn btn-outline-secondary btn-sm">
+           class="btn btn-primary btn-sm">
             <i class="bi bi-pencil me-1"></i> Bearbeiten
         </a>
     </div>
@@ -86,8 +86,8 @@
 
     <!-- Aktiver Mietvertrag / Leerstand -->
     <div class="col-md-6">
-        <div class="card border-0 shadow-sm h-100">
-            <div class="card-header bg-white border-bottom-0 pt-3">
+        <div class="card border-0  shadow-sm h-100">
+            <div class="card-header bg-primary border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0">
                     <i class="bi bi-file-earmark-text-fill text-primary me-2"></i>
                     Aktuelles Mietverhältnis
@@ -147,7 +147,7 @@
                         <i class="bi bi-door-open display-6 text-muted d-block mb-2"></i>
                         <p class="text-muted mb-3">Einheit ist aktuell nicht vermietet.</p>
                         <a href="<?= base_url("mietvertraege/neu?einheit_id={$e['id']}") ?>"
-                           class="btn btn-success btn-sm">
+                           class="btn btn-primary btn-sm">
                             <i class="bi bi-plus me-1"></i> Mietvertrag anlegen
                         </a>
                     </div>
@@ -159,7 +159,7 @@
     <!-- Beschreibung + Stammdaten -->
     <div class="col-md-6">
         <div class="card border-0 shadow-sm h-100">
-            <div class="card-header bg-white border-bottom-0 pt-3">
+            <div class="card-header bg-primary border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0">
                     <i class="bi bi-info-circle-fill text-info me-2"></i>
                     Stammdaten

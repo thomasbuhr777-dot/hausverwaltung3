@@ -12,19 +12,19 @@
         <?php if ($rechnung['status'] === 'offen'): ?>
         <form method="post" action="<?= base_url("eingangsrechnungen/{$rechnung['id']}/bezahlt") ?>">
             <?= csrf_field() ?>
-            <button class="btn btn-success btn-sm">
+            <button class="btn btn-primary btn-sm">
                 <i class="bi bi-check-lg me-1"></i> Als bezahlt markieren
             </button>
         </form>
         <?php endif; ?>
-        <a href="<?= base_url("eingangsrechnungen/{$rechnung['id']}/bearbeiten") ?>" class="btn btn-outline-secondary btn-sm">
+        <a href="<?= base_url("eingangsrechnungen/{$rechnung['id']}/bearbeiten") ?>" class="btn btn-warning btn-sm">
             <i class="bi bi-pencil me-1"></i> Bearbeiten
         </a>
         <form method="post" action="<?= base_url("eingangsrechnungen/{$rechnung['id']}/loeschen") ?>"
               onsubmit="return confirm('Rechnung wirklich löschen?')">
             <?= csrf_field() ?>
-            <button class="btn btn-outline-danger btn-sm">
-                <i class="bi bi-trash me-1"></i> Löschen
+            <button class="btn btn-outline-warning btn-sm">
+                <i class="bi bi-trash me-1"></i>
             </button>
         </form>
     </div>
@@ -34,7 +34,7 @@
     <!-- Linke Spalte: Rechnungsdaten -->
     <div class="col-md-6">
         <div class="card border-0 shadow-sm h-100">
-            <div class="card-header bg-white border-bottom-0 pt-3">
+            <div class="card-header  border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0">
                     <i class="bi bi-receipt text-warning me-2"></i>Rechnungsdaten
                 </h6>
@@ -85,7 +85,7 @@
     <!-- Rechte Spalte: Beträge & Zuweisung -->
     <div class="col-md-6">
         <div class="card border-0 shadow-sm mb-3">
-            <div class="card-header bg-white border-bottom-0 pt-3">
+            <div class="card-header bg-primary border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0">
                     <i class="bi bi-cash-coin text-success me-2"></i>Beträge
                 </h6>
@@ -105,7 +105,7 @@
         </div>
 
         <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white border-bottom-0 pt-3">
+            <div class="card-header bg-primary border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0">
                     <i class="bi bi-building text-info me-2"></i>Zuweisung
                 </h6>
@@ -144,7 +144,7 @@
     <?php if ($rechnung['beschreibung']): ?>
     <div class="col-12">
         <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white border-bottom-0 pt-3">
+            <div class="card-header bg-primary border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0"><i class="bi bi-chat-text me-2"></i>Beschreibung</h6>
             </div>
             <div class="card-body text-muted">
@@ -158,7 +158,7 @@
     <?php if ($rechnung['datei_pfad']): ?>
     <div class="col-12">
         <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white border-bottom-0 pt-3">
+            <div class="card-header bg-primary border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0"><i class="bi bi-paperclip me-2"></i>Anhang</h6>
             </div>
             <div class="card-body">
