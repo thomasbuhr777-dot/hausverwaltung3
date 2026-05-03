@@ -1,0 +1,6 @@
+{
+  "name": "BelegFix",
+  "description": "Extrahiere automatisch Daten aus Rechnungen, Quittungen und Belegen mithilfe von KI-gestütztem OCR.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
