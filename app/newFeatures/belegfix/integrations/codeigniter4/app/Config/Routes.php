@@ -9,6 +9,9 @@ use CodeIgniter\Router\RouteCollection;
 // Hauptseite für den Upload
 $routes->get('belege', 'BelegController::index');
 
+// Hilfe zur Modell-Suche (temporär)
+$routes->get('belege/debug-models', 'BelegController::listModels');
+
 // Verarbeitet den Upload und führt die Analyse aus
 $routes->post('belege/analyze', 'BelegController::analyze');
 

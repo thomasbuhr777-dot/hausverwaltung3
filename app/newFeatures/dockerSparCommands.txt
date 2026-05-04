@@ -1,0 +1,3 @@
+docker exec -it ci4_web php spark migrate
+docker exec -it ci4_web php spark migrate:status
+docker exec -it ci4_web php spark routes

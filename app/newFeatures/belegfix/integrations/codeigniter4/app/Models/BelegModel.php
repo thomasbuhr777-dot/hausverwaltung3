@@ -31,8 +31,7 @@ class BelegModel extends Model
     protected $updatedField  = 'updated_at';
 
     /**
-     * Beispiel für eine benutzerdefinierte Validierung der IBAN
-     * (Einfaches Regex-Format)
+     * Validierung der IBAN
      */
     public function validateIban($iban)
     {
