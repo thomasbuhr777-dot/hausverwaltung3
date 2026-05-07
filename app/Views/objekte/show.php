@@ -51,7 +51,7 @@
         </a>
         <a href="<?= base_url("objekte/{$objekt['id']}/bearbeiten") ?>"
            class="btn btn-primary btn-sm">
-            <i class="bi bi-pencil"></i> Bearbeiten
+            <i class="bi bi-pencil"></i> Objekt bearbeiten
         </a>
         <!-- Löschen-Button -->
         <form method="post"
@@ -191,7 +191,12 @@
                         <td>
                             <a href="<?= base_url("einheiten/{$e['id']}") ?>"
                                class="btn btn-sm btn-primary">Details</a>
+                                <a href="<?= base_url("einheiten/{$e['id']}/bearbeiten") ?>"
+           class="btn btn-primary btn-sm">
+            <i class="bi bi-pencil"></i> Einheit Bearbeiten
+        </a>
                         </td>
+
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

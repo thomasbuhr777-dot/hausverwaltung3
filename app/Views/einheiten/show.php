@@ -29,7 +29,7 @@
         </a>
         <a href="<?= base_url("einheiten/{$e['id']}/bearbeiten") ?>"
            class="btn btn-primary btn-sm">
-            <i class="bi bi-pencil me-1"></i> Bearbeiten
+            <i class="bi bi-pencil me-1"></i> Einheit bearbeiten
         </a>
     </div>
 </div>
@@ -53,7 +53,7 @@
                 <?php if ($e['etage'] !== null): ?>
                     <span class="me-3">
                         <i class="bi bi-layers me-1"></i>
-                        <?= $e['etage'] == 0 ? 'Erdgeschoss' : $e['etage'] . '. Obergeschoss' ?>
+                        <?= $e['etage'] == 0 ? 'EG' : $e['etage'] . '. OG' ?>, <?= $e['lage_bezeichnung']?>
                     </span>
                 <?php endif; ?>
                 <?php if ($e['flaeche']): ?>
@@ -173,7 +173,7 @@
                     <dt class="col-5 text-muted">Etage</dt>
                     <dd class="col-7">
                         <?php if ($e['etage'] !== null): ?>
-                            <?= $e['etage'] == 0 ? 'Erdgeschoss' : ($e['etage'] < 0 ? 'Untergeschoss ' . abs($e['etage']) : $e['etage'] . '. Obergeschoss') ?>
+                            <?= $e['etage'] == 0 ? 'EG' : ($e['etage'] < 0 ? 'UG ' . abs($e['etage']) : $e['etage'] . '. OG') ?>
                         <?php else: ?>
                             <span class="text-muted">–</span>
                         <?php endif; ?>
