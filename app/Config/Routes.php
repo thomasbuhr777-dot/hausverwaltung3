@@ -138,4 +138,9 @@ $routes->group('settings', ['filter' => 'session'], function ($routes) {
     $routes->get('profile', 'ProfileController::edit', ['filter' => 'session']);
     $routes->post('profile', 'ProfileController::update', ['filter' => 'session']);
     $routes->post('profile/avatar', 'ProfileController::uploadAvatar', ['filter' => 'session']);
+    
+    /****************************************************************************
+    * Ausstattungsmerkmale *
+    *****************************************************************************/
+    $routes->get('ausstattungsmerkmale', 'Ausstattungsmerkmale::index');
 });

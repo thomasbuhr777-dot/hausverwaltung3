@@ -68,6 +68,14 @@
         }
         .stat-card .value { font-size: 2rem; font-weight: 700; }
         .stat-card .label { font-size: .875rem; }
+        .wohnungsmerkmal-tag {
+    transition: all .15s ease;
+}
+
+.wohnungsmerkmal-tag:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--bs-box-shadow-sm);
+}
     </style>
 
     <?= $this->renderSection('styles') ?>
