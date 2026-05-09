@@ -90,7 +90,7 @@ class MietvertraegeController extends BaseController
         return view('mietvertraege/form', [
             'title'    => 'Vertrag bearbeiten',
             'vertrag'  => $vertrag,
-            'einheiten' => $einheitModel->findAll(),
+            'einheiten' => $einheitModel->findAllWithArt(),
         ]);
     }
 

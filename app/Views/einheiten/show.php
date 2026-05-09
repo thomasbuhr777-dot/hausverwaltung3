@@ -178,11 +178,8 @@
                             <span class="text-muted">–</span>
                         <?php endif; ?>
                     </dd>
-                    <dt class="col-5 text-muted">Geschoss</dt>
-<dd class="col-7"><?= esc($e['geschoss_bezeichnung'] ?? '–') ?></dd>
-
-<dt class="col-5 text-muted">Lage</dt>
-<dd class="col-7"><?= esc($e['lage_bezeichnung'] ?? '–') ?></dd>
+                    <dt class="col-5 text-muted">Lage</dt>
+                    <dd class="col-7"><?= esc($e['lage_bezeichnung'] ?? '–') ?></dd>
                     <dt class="col-5 text-muted">Wohnfläche</dt>
                     <dd class="col-7">
                         <?= $e['flaeche'] ? number_format($e['flaeche'], 2, ',', '.') . ' m²' : '–' ?>

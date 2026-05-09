@@ -174,10 +174,12 @@ class ObjektModel extends Model
 
         // Direkte DB-Abfrage statt Model-Instanz, um Konsistenz zu wahren
         // und unnötige Kopplung an EinheitModel zu vermeiden.
-        $objekt['einheiten'] = $this->db->table('einheiten')
-            ->where('objekt_id', $id)
-            ->where('deleted_at IS NULL')
-            ->orderBy('bezeichnung', 'ASC')
+        $objekt['einheiten'] = $this->db->table('einheiten e')
+            ->select('e.*, ea.bezeichnung AS einheitenart_bezeichnung')
+            ->join('einheitenarten ea', 'ea.id = e.einheitenart_id AND ea.deleted_at IS NULL', 'left')
+            ->where('e.objekt_id', $id)
+            ->where('e.deleted_at IS NULL')
+            ->orderBy('e.bezeichnung', 'ASC')
             ->get()
             ->getResultArray();
 

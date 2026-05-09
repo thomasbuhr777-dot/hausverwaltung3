@@ -12,7 +12,7 @@
  *  - Einheiten-Tabelle: Spalten "Geschoss" und "Lage" fehlten im Original
  *    (waren im Index-View vorhanden, aber nicht in show). Da die Einheiten
  *    jetzt aus getObjektWithEinheiten() kommen (ohne JOIN auf Lookup-Tabellen),
- *    werden einheitengeschoss_id / einheitenlage_id als Rohdaten angezeigt.
+ *    wird die Einheitenlage als Rohdaten angezeigt.
  *    Besser: EinheitModel::getEinheitenMitDetails() im Controller nutzen –
  *    als Kommentar markiert für spätere Erweiterung.
  *  - Delete-Formular für Objekt in show.php ergänzt (war im Original nicht
@@ -157,7 +157,7 @@
                 <thead>
                     <tr>
                         <th>Bezeichnung</th>
-                        <th>Typ</th>
+                        <th>Einheitenart</th>
                         <th>Etage</th>
                         <th>Fläche</th>
                         <th>Zimmer</th>
@@ -169,7 +169,7 @@
                     <?php foreach ($objekt['einheiten'] as $e): ?>
                     <tr>
                         <td class="fw-medium"><?= esc($e['bezeichnung']) ?></td>
-                        <td class="text-capitalize"><?= esc($e['typ']) ?></td>
+                        <td><?= esc($e['einheitenart_bezeichnung'] ?? '–') ?></td>
                         <td>
                             <?php if ($e['etage'] !== null): ?>
                                 <?= (int) $e['etage'] === 0 ? 'EG' : ((int) $e['etage'] < 0 ? 'UG ' . abs((int) $e['etage']) : (int) $e['etage'] . '.OG') ?>

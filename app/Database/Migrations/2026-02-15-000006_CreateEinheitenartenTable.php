@@ -19,6 +19,17 @@ class CreateEinheitenarten extends Migration
                 'constraint' => 100,
             ],
 
+            'sortierung' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+                'default'    => 0,
+            ],
+            'aktiv' => [
+                'type'       => 'TINYINT',
+                'constraint' => 1,
+                'default'    => 1,
+            ],
+
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,

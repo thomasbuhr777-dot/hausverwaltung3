@@ -49,21 +49,23 @@ class ImmoSeeder extends Seeder
         ];
         $this->db->table('objekte')->insertBatch($objekte);
 
+        $einheitenarten = $this->ensureEinheitenarten($now);
+
         // ----------------------------------------------------------------
         // 2. Einheiten
         // ----------------------------------------------------------------
         $einheiten = [
             // Lindenweg – Wohnungen
-            ['id' => 1, 'objekt_id' => 1, 'bezeichnung' => 'Wohnung EG links',    'typ' => 'wohnung',    'etage' => 0,  'flaeche' => 68.5,  'zimmer' => 2.5, 'status' => 'vermietet',  'created_at' => $now, 'updated_at' => $now],
-            ['id' => 2, 'objekt_id' => 1, 'bezeichnung' => 'Wohnung EG rechts',   'typ' => 'wohnung',    'etage' => 0,  'flaeche' => 72.0,  'zimmer' => 3.0, 'status' => 'vermietet',  'created_at' => $now, 'updated_at' => $now],
-            ['id' => 3, 'objekt_id' => 1, 'bezeichnung' => 'Wohnung 1.OG links',  'typ' => 'wohnung',    'etage' => 1,  'flaeche' => 68.5,  'zimmer' => 2.5, 'status' => 'vermietet',  'created_at' => $now, 'updated_at' => $now],
-            ['id' => 4, 'objekt_id' => 1, 'bezeichnung' => 'Wohnung 1.OG rechts', 'typ' => 'wohnung',    'etage' => 1,  'flaeche' => 72.0,  'zimmer' => 3.0, 'status' => 'verfuegbar', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 5, 'objekt_id' => 1, 'bezeichnung' => 'Stellplatz 1',        'typ' => 'stellplatz', 'etage' => null,'flaeche' => 12.5, 'zimmer' => null,'status' => 'vermietet',  'created_at' => $now, 'updated_at' => $now],
-            ['id' => 6, 'objekt_id' => 1, 'bezeichnung' => 'Keller 1',            'typ' => 'lager',      'etage' => -1, 'flaeche' => 8.0,   'zimmer' => null,'status' => 'verfuegbar', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 1, 'objekt_id' => 1, 'bezeichnung' => 'Wohnung EG links',    'einheitenart_id' => $einheitenarten['Wohnung'],    'etage' => 0,  'flaeche' => 68.5,  'zimmer' => 2.5, 'status' => 'vermietet',  'created_at' => $now, 'updated_at' => $now],
+            ['id' => 2, 'objekt_id' => 1, 'bezeichnung' => 'Wohnung EG rechts',   'einheitenart_id' => $einheitenarten['Wohnung'],    'etage' => 0,  'flaeche' => 72.0,  'zimmer' => 3.0, 'status' => 'vermietet',  'created_at' => $now, 'updated_at' => $now],
+            ['id' => 3, 'objekt_id' => 1, 'bezeichnung' => 'Wohnung 1.OG links',  'einheitenart_id' => $einheitenarten['Wohnung'],    'etage' => 1,  'flaeche' => 68.5,  'zimmer' => 2.5, 'status' => 'vermietet',  'created_at' => $now, 'updated_at' => $now],
+            ['id' => 4, 'objekt_id' => 1, 'bezeichnung' => 'Wohnung 1.OG rechts', 'einheitenart_id' => $einheitenarten['Wohnung'],    'etage' => 1,  'flaeche' => 72.0,  'zimmer' => 3.0, 'status' => 'verfuegbar', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 5, 'objekt_id' => 1, 'bezeichnung' => 'Stellplatz 1',        'einheitenart_id' => $einheitenarten['Stellplatz'], 'etage' => null,'flaeche' => 12.5, 'zimmer' => null,'status' => 'vermietet',  'created_at' => $now, 'updated_at' => $now],
+            ['id' => 6, 'objekt_id' => 1, 'bezeichnung' => 'Keller 1',            'einheitenart_id' => $einheitenarten['Lager'],      'etage' => -1, 'flaeche' => 8.0,   'zimmer' => null,'status' => 'verfuegbar', 'created_at' => $now, 'updated_at' => $now],
             // Kanalstraße – Büros
-            ['id' => 7, 'objekt_id' => 2, 'bezeichnung' => 'Büro EG',    'typ' => 'gewerbe', 'etage' => 0, 'flaeche' => 240.0, 'zimmer' => null, 'status' => 'vermietet',  'created_at' => $now, 'updated_at' => $now],
-            ['id' => 8, 'objekt_id' => 2, 'bezeichnung' => 'Büro 1.OG',  'typ' => 'gewerbe', 'etage' => 1, 'flaeche' => 310.0, 'zimmer' => null, 'status' => 'vermietet',  'created_at' => $now, 'updated_at' => $now],
-            ['id' => 9, 'objekt_id' => 2, 'bezeichnung' => 'Büro 2.OG',  'typ' => 'gewerbe', 'etage' => 2, 'flaeche' => 280.0, 'zimmer' => null, 'status' => 'verfuegbar', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 7, 'objekt_id' => 2, 'bezeichnung' => 'Büro EG',    'einheitenart_id' => $einheitenarten['Gewerbe'], 'etage' => 0, 'flaeche' => 240.0, 'zimmer' => null, 'status' => 'vermietet',  'created_at' => $now, 'updated_at' => $now],
+            ['id' => 8, 'objekt_id' => 2, 'bezeichnung' => 'Büro 1.OG',  'einheitenart_id' => $einheitenarten['Gewerbe'], 'etage' => 1, 'flaeche' => 310.0, 'zimmer' => null, 'status' => 'vermietet',  'created_at' => $now, 'updated_at' => $now],
+            ['id' => 9, 'objekt_id' => 2, 'bezeichnung' => 'Büro 2.OG',  'einheitenart_id' => $einheitenarten['Gewerbe'], 'etage' => 2, 'flaeche' => 280.0, 'zimmer' => null, 'status' => 'verfuegbar', 'created_at' => $now, 'updated_at' => $now],
         ];
         $this->db->table('einheiten')->insertBatch($einheiten);
 
@@ -111,4 +113,61 @@ class ImmoSeeder extends Seeder
         echo "ImmoSeeder abgeschlossen.\n";
         echo "Objekte: 2 | Einheiten: 9 | Mietverträge: 6 | Zahlungen: 12 | Rechnungen: 5\n";
     }
+
+    /**
+     * @return array<string, int>
+     */
+    private function nextEinheitenartSortierung(): int
+    {
+        $row = $this->db->table('einheitenarten')
+            ->selectMax('sortierung', 'max_sortierung')
+            ->get()
+            ->getRowArray();
+
+        return ((int) ($row['max_sortierung'] ?? 0)) + 1;
+    }
+
+    private function ensureEinheitenarten(string $now): array
+    {
+        $bezeichnungen = [
+            'Wohnung',
+            'Gewerbe',
+            'Stellplatz',
+            'Lager',
+            'Sonstige',
+            'Büro',
+            'Garage',
+            'Keller',
+        ];
+
+        foreach ($bezeichnungen as $bezeichnung) {
+            $exists = $this->db->table('einheitenarten')
+                ->where('bezeichnung', $bezeichnung)
+                ->countAllResults() > 0;
+
+            if (! $exists) {
+                $this->db->table('einheitenarten')->insert([
+                    'bezeichnung' => $bezeichnung,
+                    'sortierung'  => $this->nextEinheitenartSortierung(),
+                    'aktiv'       => 1,
+                    'created_at'  => $now,
+                    'updated_at'  => $now,
+                ]);
+            }
+        }
+
+        $rows = $this->db->table('einheitenarten')
+            ->select('id, bezeichnung')
+            ->whereIn('bezeichnung', $bezeichnungen)
+            ->get()
+            ->getResultArray();
+
+        $ids = [];
+        foreach ($rows as $row) {
+            $ids[$row['bezeichnung']] = (int) $row['id'];
+        }
+
+        return $ids;
+    }
+
 }

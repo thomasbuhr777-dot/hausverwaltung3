@@ -57,7 +57,6 @@ class EinheitenController extends BaseController
     public function new(): string
     {
         $objektModel    = new ObjektModel();
-        $lookupModel    = new LookupModel();
         $einheitenartModel = new EinheitenartModel();
         $ausstattungModel  = new AusstattungsmerkmalModel();
         $objektId = $this->request->getGet('objekt_id') ? (int) $this->request->getGet('objekt_id') : null;
@@ -66,7 +65,6 @@ class EinheitenController extends BaseController
             'title'          => 'Neue Einheit anlegen',
             'einheit'        => ['objekt_id' => $objektId],
             'objekte'        => $objektModel->findAll(),
-            'geschosse'      => $lookupModel->forTable('einheitengeschoss')->getItems('active'),
             'lagen'          => (new LookupModel())->forTable('einheitenlage')->getItems('active'),
             'einheitenarten' => $einheitenartModel->getAsList(),
             'merkmal_gruppen' => $ausstattungModel->getGrouped(),
@@ -101,7 +99,6 @@ class EinheitenController extends BaseController
         }
 
         $objektModel       = new ObjektModel();
-        $lookupModel       = new LookupModel();
         $einheitenartModel = new EinheitenartModel();
         $ausstattungModel  = new AusstattungsmerkmalModel();
         $tagModel          = new EinheitTagModel();
@@ -110,7 +107,6 @@ class EinheitenController extends BaseController
             'title'           => 'Einheit bearbeiten: ' . $einheit['bezeichnung'],
             'einheit'         => $einheit,
             'objekte'         => $objektModel->findAll(),
-            'geschosse'       => $lookupModel->forTable('einheitengeschoss')->getItems('active'),
             'lagen'           => (new LookupModel())->forTable('einheitenlage')->getItems('active'),
             'einheitenarten'  => $einheitenartModel->getAsList(),
             'merkmal_gruppen' => $ausstattungModel->getGrouped(),

@@ -66,22 +66,6 @@ $errors = session('errors') ?? [];
                             </select>
                         </div>
 
-                        <!-- Geschoss -->
-                        <div class="col-md-4">
-                            <label class="form-label fw-semibold">Geschoss *</label>
-                            <select name="einheitengeschoss_id"
-                                    class="form-select<?= isset($errors['einheitengeschoss_id']) ? ' is-invalid' : '' ?>"
-                                    required>
-                                <option value="">— wählen —</option>
-                                <?php foreach ($geschosse as $g): ?>
-                                    <option value="<?= $g['id'] ?>"
-                                        <?= (int) old('einheitengeschoss_id', $einheit['einheitengeschoss_id'] ?? 0) === (int) $g['id'] ? 'selected' : '' ?>>
-                                        <?= esc($g['bezeichnung']) ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-
                         <!-- Etage -->
                         <div class="col-md-4">
                             <label class="form-label fw-semibold">Etage *</label>
