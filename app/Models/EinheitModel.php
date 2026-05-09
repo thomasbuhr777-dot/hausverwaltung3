@@ -14,10 +14,10 @@ class EinheitModel extends Model
 
     protected $allowedFields = [
         'objekt_id',
+        'einheitenart_id',
         'einheitengeschoss_id',
         'einheitenlage_id',
         'bezeichnung',
-        'typ',
         'etage',
         'flaeche',
         'zimmer',
@@ -31,14 +31,14 @@ class EinheitModel extends Model
     protected $deletedField  = 'deleted_at';
 
     protected $validationRules = [
-        'objekt_id'               => 'required|integer|is_not_unique[objekte.id]',
-        'einheitengeschoss_id'    => 'required|integer',
-        'einheitenlage_id'        => 'required|integer',
-        'bezeichnung'             => 'required|min_length[1]|max_length[100]',
-        'typ'                     => 'required|in_list[wohnung,gewerbe,stellplatz,lager,sonstige,büro,garage,keller]',
-        'flaeche'                 => 'permit_empty|decimal',
-        'zimmer'                  => 'permit_empty|decimal',
-        'status'                  => 'permit_empty|in_list[verfuegbar,vermietet,gesperrt]',
+        'objekt_id'            => 'required|integer|is_not_unique[objekte.id]',
+        'einheitenart_id'      => 'required|integer',
+        'einheitengeschoss_id' => 'required|integer',
+        'einheitenlage_id'     => 'required|integer',
+        'bezeichnung'          => 'required|min_length[1]|max_length[100]',
+        'flaeche'              => 'permit_empty|decimal',
+        'zimmer'               => 'permit_empty|decimal',
+        'status'               => 'permit_empty|in_list[verfuegbar,vermietet,gesperrt]',
     ];
 
     public function getEinheitenMitDetails(?int $objektId = null): array
@@ -50,6 +50,7 @@ class EinheitModel extends Model
                 o.strasse,
                 o.ort,
 
+                ea.bezeichnung AS einheitenart_bezeichnung,
                 lg.bezeichnung AS lage_bezeichnung,
                 gs.bezeichnung AS geschoss_bezeichnung,
 
@@ -60,6 +61,7 @@ class EinheitModel extends Model
                 mv.beginn_datum
             ')
             ->join('objekte o', 'o.id = e.objekt_id', 'left')
+            ->join('einheitenarten ea', 'ea.id = e.einheitenart_id', 'left')
             ->join('einheitenlage lg', 'lg.id = e.einheitenlage_id', 'left')
             ->join('einheitengeschoss gs', 'gs.id = e.einheitengeschoss_id', 'left')
             ->join('mietvertraege mv', 'mv.einheit_id = e.id AND mv.status = "aktiv" AND mv.deleted_at IS NULL', 'left')

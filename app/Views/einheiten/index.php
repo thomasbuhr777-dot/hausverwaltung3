@@ -26,7 +26,7 @@
                     <!-- class="text-end" -->
                     <th>Objekt</th>
                     <th>Bezeichnung</th>
-                    <th>Typ</th>
+                    <th>Einheitenart</th>
                     <th>Etage</th>
                     <th>Geschoss</th>
                     <th>Lage</th>
@@ -53,7 +53,7 @@
                         <div class="text-muted small"><?= esc($e['ort'] ?? '') ?></div>
                     </td>
                     <td class="fw-medium"><?= esc($e['bezeichnung']) ?></td>
-                    <td class="text-capitalize"><?= esc($e['typ']) ?></td>
+                    <td><?= esc($e['einheitenart_bezeichnung'] ?? '–') ?></td>
                     <td><?= $e['etage'] !== null ? ($e['etage'] == 0 ? 'EG' : $e['etage'] . '.OG') : '–' ?></td>
                     <td><?= esc($e['geschoss_bezeichnung'] ?? '–') ?></td>
                     <td><?= esc($e['lage_bezeichnung'] ?? '–') ?></td>

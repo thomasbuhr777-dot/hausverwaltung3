@@ -41,7 +41,7 @@
              style="width:64px;height:64px;font-size:1.75rem;
                     background:<?= $e['status'] === 'vermietet' ? '#dbeafe' : ($e['status'] === 'verfuegbar' ? '#d1fae5' : '#fee2e2') ?>;
                     color:<?= $e['status'] === 'vermietet' ? '#1e40af' : ($e['status'] === 'verfuegbar' ? '#065f46' : '#991b1b') ?>">
-            <i class="bi bi-<?= $e['typ'] === 'stellplatz' ? 'p-square' : ($e['typ'] === 'gewerbe' ? 'building' : 'door-open') ?>-fill"></i>
+            <i class="bi bi-door-open-fill"></i>
         </div>
         <div class="flex-grow-1">
             <div class="d-flex align-items-center gap-2 mb-1">
@@ -49,7 +49,7 @@
                 <span class="badge badge-status-<?= $e['status'] ?>"><?= ucfirst($e['status']) ?></span>
             </div>
             <div class="text-muted">
-                <span class="text-capitalize me-3"><?= esc($e['typ']) ?></span>
+                <span class="me-3"><?= esc($e['einheitenart_bezeichnung'] ?? '–') ?></span>
                 <?php if ($e['etage'] !== null): ?>
                     <span class="me-3">
                         <i class="bi bi-layers me-1"></i>
@@ -167,8 +167,8 @@
             </div>
             <div class="card-body">
                 <dl class="row mb-0">
-                    <dt class="col-5 text-muted">Typ</dt>
-                    <dd class="col-7 text-capitalize"><?= esc($e['typ']) ?></dd>
+                    <dt class="col-5 text-muted">Einheitenart</dt>
+                    <dd class="col-7"><?= esc($e['einheitenart_bezeichnung'] ?? '–') ?></dd>
 
                     <dt class="col-5 text-muted">Etage</dt>
                     <dd class="col-7">
@@ -205,6 +205,39 @@
             </div>
         </div>
     </div>
+
+    <!-- Ausstattungsmerkmale / Tags -->
+    <?php if (!empty($tags)): ?>
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom py-3">
+                <h6 class="fw-semibold mb-0">
+                    <i class="bi bi-tags-fill text-primary me-2"></i>
+                    Ausstattungsmerkmale
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <?php foreach ($tags as $kategorie => $merkmale): ?>
+                        <div class="col-12 col-md-6 col-xl-4">
+                            <p class="text-muted small fw-semibold mb-2"><?= esc($kategorie) ?></p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <?php foreach ($merkmale as $m): ?>
+                                    <span class="badge rounded-pill bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 px-3 py-2">
+                                        <?php if (!empty($m['icon'])): ?>
+                                            <i class="<?= esc($m['icon']) ?> me-1"></i>
+                                        <?php endif; ?>
+                                        <?= esc($m['bezeichnung']) ?>
+                                    </span>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
 
     <!-- Vertragshistorie -->
     <?php if (count($vertraege) > 1 || ($vertraege && ! $aktiverVertrag)): ?>

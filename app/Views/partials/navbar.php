@@ -107,8 +107,8 @@ $avatar = auth()->user()->avatar
     </li>
    
     <li>
-        <a class="dropdown-item" href="<?= base_url('settings/lookup/einheitengeschoss') ?>">
-            Einheitengeschoss
+        <a class="dropdown-item" href="<?= base_url('settings/lookup/einheitenarten') ?>">
+            Einheitenarten
         </a>
     </li>
      <!--
