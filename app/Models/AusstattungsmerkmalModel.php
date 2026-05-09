@@ -25,6 +25,11 @@ class AusstattungsmerkmalModel extends Model
     protected $useTimestamps = true;
     protected $useSoftDeletes = true;
 
+    public function getGrouped(): array
+    {
+        return $this->getGroupedByKategorie();
+    }
+
     public function getGroupedByKategorie(): array
     {
         $merkmale = $this
