@@ -29,7 +29,7 @@
                                 <?php foreach ($einheiten as $e): ?>
                                 <option value="<?= $e['id'] ?>"
                                     <?= old('einheit_id', $vertrag['einheit_id'] ?? '') == $e['id'] ? 'selected' : '' ?>>
-                                    <?= esc($e['bezeichnung']) ?> (<?= esc($e['typ']) ?>)
+                                    <?= esc($e['bezeichnung']) ?> (<?= esc($e['einheitenart_bezeichnung'] ?? '–') ?>)
                                     <?= $e['status'] !== 'verfuegbar' ? ' [' . ucfirst($e['status']) . ']' : '' ?>
                                 </option>
                                 <?php endforeach; ?>

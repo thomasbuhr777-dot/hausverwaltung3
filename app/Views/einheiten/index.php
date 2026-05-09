@@ -28,21 +28,18 @@
                     <th>Bezeichnung</th>
                     <th>Einheitenart</th>
                     <th>Etage</th>
-                    <th>Geschoss</th>
                     <th>Lage</th>
                     <th>Fläche</th>
                     <th>Zimmer</th>
                     <th>Mieter</th>
                     <th>Kaltmiete</th>
                     <th>Status</th>
-                    <th>Geschoss</th>
-                    <th>Lage</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (empty($einheiten)): ?>
-                <tr><td colspan="10" class="text-center text-muted py-4">Keine Einheiten vorhanden.</td></tr>
+                <tr><td colspan="11" class="text-center text-muted py-4">Keine Einheiten vorhanden.</td></tr>
                 <?php else: ?>
                 <?php foreach ($einheiten as $e): ?>
                 <tr>
@@ -55,7 +52,6 @@
                     <td class="fw-medium"><?= esc($e['bezeichnung']) ?></td>
                     <td><?= esc($e['einheitenart_bezeichnung'] ?? '–') ?></td>
                     <td><?= $e['etage'] !== null ? ($e['etage'] == 0 ? 'EG' : $e['etage'] . '.OG') : '–' ?></td>
-                    <td><?= esc($e['geschoss_bezeichnung'] ?? '–') ?></td>
                     <td><?= esc($e['lage_bezeichnung'] ?? '–') ?></td>
                     <td><?= $e['flaeche'] ? number_format($e['flaeche'], 2, ',', '.') . ' m²' : '–' ?></td>
                     <td><?= $e['zimmer'] ?? '–' ?></td>

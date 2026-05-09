@@ -16,7 +16,6 @@ class LookupController extends BaseController
         'objektarten',
         'etagen',
         'einheitenarten',
-        'einheitengeschoss',
         'einheitenlage',
         'ausstattungen',
         'heizungsarten',

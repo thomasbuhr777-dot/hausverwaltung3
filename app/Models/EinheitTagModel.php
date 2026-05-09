@@ -64,7 +64,9 @@ class EinheitTagModel extends Model
     {
         $this->where('einheit_id', $einheitId)->delete();
 
-        if (empty($merkmalIds)) {
+        $merkmalIds = array_values(array_unique(array_filter(array_map('intval', $merkmalIds))));
+
+        if ($merkmalIds === []) {
             return;
         }
 
@@ -73,7 +75,7 @@ class EinheitTagModel extends Model
         foreach ($merkmalIds as $mid) {
             $rows[] = [
                 'einheit_id'             => $einheitId,
-                'ausstattungsmerkmal_id' => (int) $mid,
+                'ausstattungsmerkmal_id' => $mid,
                 'created_at'             => $now,
             ];
         }

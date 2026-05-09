@@ -30,7 +30,11 @@ class EinheitenartModel extends Model
      */
     public function getAsList(): array
     {
-        $rows = $this->where('deleted_at IS NULL')->orderBy('bezeichnung', 'ASC')->findAll();
+        $rows = $this->where('deleted_at IS NULL')
+            ->where('aktiv', 1)
+            ->orderBy('sortierung', 'ASC')
+            ->orderBy('bezeichnung', 'ASC')
+            ->findAll();
         $result = [];
         foreach ($rows as $row) {
             $result[$row['id']] = $row['bezeichnung'];
