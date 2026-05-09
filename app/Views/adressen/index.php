@@ -25,7 +25,7 @@ $baseUrl = base_url('adressen');
     <input type="hidden" name="dir"  value="<?= esc($dir) ?>">
     <div class="d-flex gap-2 mb-4 flex-wrap">
         <div class="input-group" style="max-width:340px">
-            <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
+            <span class="input-group-text"><i class="bi bi-search text-muted"></i></span>
             <input type="text" name="q" class="form-control border-start-0"
                    placeholder="Name, E-Mail, Ort…"
                    value="<?= esc($suche) ?>"
@@ -41,7 +41,7 @@ $baseUrl = base_url('adressen');
             <option value="person" <?= $typ === 'person' ? 'selected' : '' ?>>Person</option>
             <option value="firma"  <?= $typ === 'firma'  ? 'selected' : '' ?>>Firma</option>
         </select>
-        <button type="submit" class="btn btn-outline-primary">
+        <button type="submit" class="btn btn-primary">
             <i class="bi bi-search me-1"></i>Suchen
         </button>
         <div class="ms-auto">

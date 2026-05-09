@@ -35,7 +35,7 @@ class EinheitModel extends Model
         'einheitengeschoss_id'    => 'required|integer',
         'einheitenlage_id'        => 'required|integer',
         'bezeichnung'             => 'required|min_length[1]|max_length[100]',
-        'typ'                     => 'required|in_list[wohnung,gewerbe,stellplatz,lager,sonstige,büro]',
+        'typ'                     => 'required|in_list[wohnung,gewerbe,stellplatz,lager,sonstige,büro,garage,keller]',
         'flaeche'                 => 'permit_empty|decimal',
         'zimmer'                  => 'permit_empty|decimal',
         'status'                  => 'permit_empty|in_list[verfuegbar,vermietet,gesperrt]',
