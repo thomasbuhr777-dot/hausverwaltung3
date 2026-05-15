@@ -66,7 +66,7 @@ class MietvertragModel extends Model
     public function getMietvertraegeMitDetails(?int $einheitId = null): array
     {
         $builder = $this->db->table('mietvertraege mv')
-            ->select('mv.*, e.bezeichnung AS einheit_bezeichnung, e.typ AS einheit_typ,
+            ->select('mv.*, e.bezeichnung AS einheit_bezeichnung, 
                       o.id AS objekt_id, o.bezeichnung AS objekt_bezeichnung,
                       o.strasse, o.hausnummer, o.plz, o.ort,
                       (mv.kaltmiete + mv.nebenkosten) AS warmmiete')
