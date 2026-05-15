@@ -17,7 +17,7 @@ class EinheitTagModel extends Model
         'ausstattungsmerkmal_id',
     ];
 
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $createdField  = 'created_at';
     protected $updatedField  = null;
     protected $deletedField  = null;
