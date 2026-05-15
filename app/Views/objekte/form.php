@@ -803,22 +803,11 @@ $errors = session('errors') ?? [];
 }());
 </script>
 
-<?php
-// [7] Google Maps Script nur einbinden, wenn API-Key konfiguriert ist.
-//     Fehlendes Key → kein Script-Tag, kein JS-Fehler in der Konsole.
-$apiKey = env('google.maps.api_key', '');
-?>
-<?php if ($apiKey): ?>
-<script
-    src="https://maps.googleapis.com/maps/api/js?key=<?= esc($apiKey) ?>&libraries=places&callback=initGooglePlaces&loading=async"
-    async defer>
-</script>
-<?php else: ?>
-<script>
-// Google Maps API-Key nicht konfiguriert (google.maps.api_key in .env fehlt).
-// Adresssuche und Kartenvorschau sind deaktiviert.
-console.warn('Google Maps API-Key nicht konfiguriert. Adresssuche deaktiviert.');
-</script>
+<?php $mapsApiKey = $googleMapsKey ?? env('GOOGLE_MAPS_API_KEY', ''); ?>
+<?php if (! empty($mapsApiKey)): ?>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=<?= esc($mapsApiKey) ?>&libraries=places&callback=initGooglePlaces&loading=async">
+    </script>
 <?php endif; ?>
 
 <?= $this->endSection() ?>

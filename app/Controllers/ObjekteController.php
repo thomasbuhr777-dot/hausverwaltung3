@@ -92,6 +92,7 @@ class ObjekteController extends BaseController
             'objekt'                  => [],
             'objektarten'             => $objektartModel->getDropdown(),
             'eigentuemer_anzeigename' => '',
+            'googleMapsKey'           => env('GOOGLE_MAPS_API_KEY'),
         ]);
     }
 
@@ -142,6 +143,7 @@ class ObjekteController extends BaseController
             'objekt'                  => $objekt,
             'objektarten'             => $objektartModel->getDropdown(),
             'eigentuemer_anzeigename' => $eigentuemer_anzeigename,
+            'googleMapsKey'           => env('GOOGLE_MAPS_API_KEY'),
         ]);
     }
 
