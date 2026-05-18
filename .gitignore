@@ -3,4 +3,8 @@
 /vendor/
 /writable/*
 .env
+/.codex/cache/
+/.codex/tmp/
+/.codex/history/
+/.codex/logs/
 

@@ -1,49 +1,43 @@
-# Agent Instructions for hausverwaltung3
+# AGENTS.md
 
-This is a CodeIgniter 4 real-estate/property-management application.
+## Projektkontext
 
-## Stack
+Dieses Repository ist eine CI4-Hausverwaltung.
+
+Tech-Stack:
 - PHP 8.2+
-- CodeIgniter 4.7+
+- CodeIgniter 4.7.x
+- MariaDB/MySQL
+- Bootstrap 5.3 mit Light/Dark Mode
 - CodeIgniter Shield
-- PHPUnit
+- Windows/XAMPP lokal, teilweise Docker/Ubuntu
 
-## Domain
-The application manages:
-- Objekte
-- Einheiten
-- Adressen
-- Mietverträge
-- Zahlungen
-- Eingangsrechnungen
-- Nebenkostenabrechnungen
-- Lookup/settings tables
-- User profile
+## Arbeitsweise
 
-## Mandatory Rules
-- Follow docs/architecture.md
-- Follow docs/conventions.md
-- Keep changes small and scoped
-- Preserve existing behavior unless the task explicitly changes it
-- Do not introduce unrelated refactorings
-- Do not rewrite complete modules unless explicitly requested
+- Bei Refactorings immer vollständige Dateien liefern, keine losen Teil-Snippets.
+- Bestehende Architektur respektieren.
+- Keine Änderungen an vendor/, writable/cache/, writable/logs/ oder .env.
+- Keine Secrets, API-Keys oder Zugangsdaten committen.
+- Vor riskanten Änderungen erst betroffene Dateien analysieren.
+- Bei Datenbankänderungen Migrationen bevorzugen.
+- Views müssen Bootstrap-5.3-kompatibel sein.
+- UI-Komponenten müssen Light/Dark Mode unterstützen.
 
-## Current Architecture Direction
-The project is being migrated gradually toward:
+## CodeIgniter-Konventionen
 
-Controller -> Service -> Repository/Model -> Database
+- Controller unter app/Controllers.
+- Models unter app/Models.
+- Views unter app/Views.
+- Migrationen unter app/Database/Migrations.
+- Seeder unter app/Database/Seeds.
+- Tabellen und Felder in snake_case.
+- Controller in PascalCase.
+- Methoden in camelCase.
+- Models nutzen allowedFields, validationRules, useTimestamps und bei Bedarf useSoftDeletes.
 
-Models may still contain query methods during transition.
-New complex business logic should go into Services.
-Direct DB writes in controllers should be moved into Services or Models during refactoring.
+## Antwortstil
 
-## Security
-- Shield session authentication is used.
-- Keep protected routes behind the session filter.
-- Never weaken authentication or authorization.
-- Validate user input before persistence.
-
-## Testing
-- Add or update tests for business logic.
-- Prefer service-level tests for calculations and workflows.
-- Run composer test when possible.
+- Deutsch.
+- Praktisch, direkt, entwicklerorientiert.
+- Bei Fehleranalyse: Ursache, konkrete Fundstelle, Lösung.
+- Bei Code: vollständige Dateien mit Pfadüberschrift.
