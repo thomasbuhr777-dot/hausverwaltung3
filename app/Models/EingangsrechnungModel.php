@@ -53,16 +53,21 @@ class EingangsrechnungModel extends Model
     {
         $builder = $this->db->table('eingangsrechnungen er')
             ->select('er.*,
-                      o.bezeichnung AS objekt_bezeichnung,
-                      o.strasse AS objekt_strasse, o.ort AS objekt_ort,
+                      COALESCE(oe.bezeichnung, oo.bezeichnung) AS objekt_bezeichnung,
+                      COALESCE(oe.strasse, oo.strasse) AS objekt_strasse,
+                      COALESCE(oe.ort, oo.ort) AS objekt_ort,
                       e.bezeichnung AS einheit_bezeichnung')
-            ->join('objekte o', 'o.id = er.objekt_id AND o.deleted_at IS NULL', 'left')
             ->join('einheiten e', 'e.id = er.einheit_id AND e.deleted_at IS NULL', 'left')
+            ->join('objekte oo', 'oo.id = er.objekt_id AND oo.deleted_at IS NULL', 'left')
+            ->join('objekte oe', 'oe.id = e.objekt_id AND oe.deleted_at IS NULL', 'left')
             ->where('er.deleted_at IS NULL')
-            ->where('((er.einheit_id IS NULL AND o.id IS NOT NULL) OR (er.einheit_id IS NOT NULL AND e.id IS NOT NULL))', null, false);
+            ->where('((er.einheit_id IS NULL AND oo.id IS NOT NULL) OR (er.einheit_id IS NOT NULL AND e.id IS NOT NULL AND oe.id IS NOT NULL))', null, false);
 
         if ($objektId !== null) {
-            $builder->where('er.objekt_id', $objektId);
+            $builder->groupStart()
+                ->where('er.objekt_id', $objektId)
+                ->orWhere('e.objekt_id', $objektId)
+            ->groupEnd();
         }
 
         if ($einheitId !== null) {
@@ -82,16 +87,20 @@ class EingangsrechnungModel extends Model
                       SUM(er.nettobetrag) AS netto_gesamt,
                       SUM(er.bruttobetrag) AS brutto_gesamt,
                       COUNT(*) AS anzahl')
-            ->join('objekte o', 'o.id = er.objekt_id AND o.deleted_at IS NULL', 'left')
             ->join('einheiten e', 'e.id = er.einheit_id AND e.deleted_at IS NULL', 'left')
+            ->join('objekte oo', 'oo.id = er.objekt_id AND oo.deleted_at IS NULL', 'left')
+            ->join('objekte oe', 'oe.id = e.objekt_id AND oe.deleted_at IS NULL', 'left')
             ->where('er.deleted_at IS NULL')
             ->groupStart()
                 ->groupStart()
                     ->where('er.einheit_id IS NULL')
                     ->where('er.objekt_id', $objektId)
-                    ->where('o.id IS NOT NULL')
+                    ->where('oo.id IS NOT NULL')
                 ->groupEnd()
-                ->orWhere('e.objekt_id', $objektId)
+                ->orGroupStart()
+                    ->where('e.objekt_id', $objektId)
+                    ->where('oe.id IS NOT NULL')
+                ->groupEnd()
             ->groupEnd();
 
         if ($jahr !== null) {
@@ -121,13 +130,14 @@ class EingangsrechnungModel extends Model
     public function getUeberfaelligeRechnungen(): array
     {
         return $this->db->table('eingangsrechnungen er')
-            ->select('er.*, o.bezeichnung AS objekt_bezeichnung, e.bezeichnung AS einheit_bezeichnung')
-            ->join('objekte o', 'o.id = er.objekt_id AND o.deleted_at IS NULL', 'left')
+            ->select('er.*, COALESCE(oe.bezeichnung, oo.bezeichnung) AS objekt_bezeichnung, e.bezeichnung AS einheit_bezeichnung')
             ->join('einheiten e', 'e.id = er.einheit_id AND e.deleted_at IS NULL', 'left')
+            ->join('objekte oo', 'oo.id = er.objekt_id AND oo.deleted_at IS NULL', 'left')
+            ->join('objekte oe', 'oe.id = e.objekt_id AND oe.deleted_at IS NULL', 'left')
             ->where('er.status', 'offen')
             ->where('er.faellig_datum <', date('Y-m-d'))
             ->where('er.deleted_at IS NULL')
-            ->where('((er.einheit_id IS NULL AND o.id IS NOT NULL) OR (er.einheit_id IS NOT NULL AND e.id IS NOT NULL))', null, false)
+            ->where('((er.einheit_id IS NULL AND oo.id IS NOT NULL) OR (er.einheit_id IS NOT NULL AND e.id IS NOT NULL AND oe.id IS NOT NULL))', null, false)
             ->orderBy('er.faellig_datum', 'ASC')
             ->get()
             ->getResultArray();
