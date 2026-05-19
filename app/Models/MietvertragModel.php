@@ -70,8 +70,8 @@ class MietvertragModel extends Model
                       o.id AS objekt_id, o.bezeichnung AS objekt_bezeichnung,
                       o.strasse, o.hausnummer, o.plz, o.ort,
                       (mv.kaltmiete + mv.nebenkosten) AS warmmiete')
-            ->join('einheiten e', 'e.id = mv.einheit_id', 'left')
-            ->join('objekte o', 'o.id = e.objekt_id', 'left')
+            ->join('einheiten e', 'e.id = mv.einheit_id AND e.deleted_at IS NULL', 'inner')
+            ->join('objekte o', 'o.id = e.objekt_id AND o.deleted_at IS NULL', 'inner')
             ->where('mv.deleted_at IS NULL');
 
         if ($einheitId !== null) {
@@ -92,8 +92,8 @@ class MietvertragModel extends Model
         $vertrag = $this->db->table('mietvertraege mv')
             ->select('mv.*, e.bezeichnung AS einheit_bezeichnung,
                       o.bezeichnung AS objekt_bezeichnung, o.strasse, o.ort')
-            ->join('einheiten e', 'e.id = mv.einheit_id')
-            ->join('objekte o', 'o.id = e.objekt_id')
+            ->join('einheiten e', 'e.id = mv.einheit_id AND e.deleted_at IS NULL')
+            ->join('objekte o', 'o.id = e.objekt_id AND o.deleted_at IS NULL')
             ->where('mv.id', $id)
             ->where('mv.deleted_at IS NULL')
             ->get()
@@ -130,8 +130,8 @@ class MietvertragModel extends Model
     {
         return $this->db->table('mietvertraege mv')
             ->select('mv.*, e.bezeichnung AS einheit_bezeichnung, o.bezeichnung AS objekt_bezeichnung')
-            ->join('einheiten e', 'e.id = mv.einheit_id')
-            ->join('objekte o', 'o.id = e.objekt_id')
+            ->join('einheiten e', 'e.id = mv.einheit_id AND e.deleted_at IS NULL')
+            ->join('objekte o', 'o.id = e.objekt_id AND o.deleted_at IS NULL')
             ->where('mv.status', 'aktiv')
             ->where('mv.ende_datum IS NOT NULL')
             ->where("mv.ende_datum <= DATE_ADD(NOW(), INTERVAL {$tage} DAY)")

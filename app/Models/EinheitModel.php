@@ -101,6 +101,7 @@ class EinheitModel extends Model
     {
         return $this->db->table('einheiten e')
             ->select('e.*, ea.bezeichnung AS einheitenart_bezeichnung')
+            ->join('objekte o', 'o.id = e.objekt_id AND o.deleted_at IS NULL', 'inner')
             ->join('einheitenarten ea', 'ea.id = e.einheitenart_id', 'left')
             ->where('e.deleted_at IS NULL');
     }

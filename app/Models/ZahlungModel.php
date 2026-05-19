@@ -48,9 +48,9 @@ class ZahlungModel extends Model
             ->select('z.*, mv.mieter_name, mv.mieter_vorname,
                       e.bezeichnung AS einheit_bezeichnung,
                       o.bezeichnung AS objekt_bezeichnung')
-            ->join('mietvertraege mv', 'mv.id = z.mietvertrag_id', 'left')
-            ->join('einheiten e', 'e.id = mv.einheit_id', 'left')
-            ->join('objekte o', 'o.id = e.objekt_id', 'left')
+            ->join('mietvertraege mv', 'mv.id = z.mietvertrag_id AND mv.deleted_at IS NULL', 'inner')
+            ->join('einheiten e', 'e.id = mv.einheit_id AND e.deleted_at IS NULL', 'inner')
+            ->join('objekte o', 'o.id = e.objekt_id AND o.deleted_at IS NULL', 'inner')
             ->where('z.deleted_at IS NULL');
 
         if ($mietvertragId !== null) {
@@ -82,6 +82,9 @@ class ZahlungModel extends Model
                       SUM(z.betrag) AS gesamt,
                       SUM(CASE WHEN z.typ = "miete" THEN z.betrag ELSE 0 END) AS miete,
                       SUM(CASE WHEN z.typ = "nebenkosten" THEN z.betrag ELSE 0 END) AS nebenkosten')
+            ->join('mietvertraege mv', 'mv.id = z.mietvertrag_id AND mv.deleted_at IS NULL', 'inner')
+            ->join('einheiten e', 'e.id = mv.einheit_id AND e.deleted_at IS NULL', 'inner')
+            ->join('objekte o', 'o.id = e.objekt_id AND o.deleted_at IS NULL', 'inner')
             ->where('YEAR(z.datum)', $jahr)
             ->where('z.status', 'bezahlt')
             ->where('z.deleted_at IS NULL')

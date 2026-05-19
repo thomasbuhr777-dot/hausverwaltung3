@@ -18,15 +18,21 @@ class DashboardController extends BaseController
         $zahlungModel  = new ZahlungModel();
         $rechnungModel = new EingangsrechnungModel();
 
+        $objekte    = $objektModel->getObjekteMitStats();
+        $einheiten  = $einheitModel->getEinheitenMitDetails();
+        $vertraege  = $vertragModel->getMietvertraegeMitDetails();
+        $zahlungen  = $zahlungModel->getZahlungenMitDetails();
+        $rechnungen = $rechnungModel->getRechnungenMitDetails();
+
         // KPIs
         $stats = [
-            'objekte_gesamt'     => $objektModel->countAll(),
-            'einheiten_gesamt'   => $einheitModel->countAll(),
-            'einheiten_vermietet' => $einheitModel->where('status', 'vermietet')->countAllResults(),
-            'einheiten_frei'     => $einheitModel->where('status', 'verfuegbar')->countAllResults(),
-            'vertraege_aktiv'    => $vertragModel->where('status', 'aktiv')->countAllResults(),
-            'zahlungen_offen'    => $zahlungModel->whereIn('status', ['offen', 'ueberfaellig'])->countAllResults(),
-            'rechnungen_offen'   => $rechnungModel->whereIn('status', ['offen', 'ueberfaellig'])->countAllResults(),
+            'objekte_gesamt'      => count($objekte),
+            'einheiten_gesamt'    => count($einheiten),
+            'einheiten_vermietet' => count(array_filter($einheiten, static fn(array $einheit): bool => $einheit['status'] === 'vermietet')),
+            'einheiten_frei'      => count(array_filter($einheiten, static fn(array $einheit): bool => $einheit['status'] === 'verfuegbar')),
+            'vertraege_aktiv'     => count(array_filter($vertraege, static fn(array $vertrag): bool => $vertrag['status'] === 'aktiv')),
+            'zahlungen_offen'     => count(array_filter($zahlungen, static fn(array $zahlung): bool => in_array($zahlung['status'], ['offen', 'ueberfaellig'], true))),
+            'rechnungen_offen'    => count(array_filter($rechnungen, static fn(array $rechnung): bool => in_array($rechnung['status'], ['offen', 'ueberfaellig'], true))),
         ];
 
         // Monatliche Einnahmen aktuelles Jahr
