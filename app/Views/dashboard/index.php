@@ -42,8 +42,8 @@
     <!-- Einnahmen-Chart -->
     <div class="col-lg-7">
         <div class="card border-0">
-            <div class="card-header border-bottom-0 pt-3 bg-primary">
-                <h6 class="fw-semibold mb-0"><i class="bi bi-bar-chart-fill me-2"></i>Einnahmen <?= date('Y') ?></h6>
+            <div class="card-header border-bottom-0 pt-3 bg-primary text-white">
+                <h6 class="fw-semibold mb-0"><i class="bi bi-bar-chart-fill text-white-50 me-2"></i>Einnahmen <?= date('Y') ?></h6>
             </div>
             <div class="card-body">
                 <canvas id="einnahmenChart" height="120"></canvas>
@@ -54,8 +54,8 @@
     <!-- Auslaufende Verträge -->
     <div class="col-lg-5">
         <div class="card border-0  h-100">
-            <div class="card-header border-bottom-0 pt-3 bg-primary">
-                <h6 class="fw-semibold mb-0"><i class="bi bi-calendar-x  me-2"></i>Auslaufende Verträge (90 Tage)</h6>
+            <div class="card-header border-bottom-0 pt-3 bg-primary text-white">
+                <h6 class="fw-semibold mb-0"><i class="bi bi-calendar-x text-white-50 me-2"></i>Auslaufende Verträge (90 Tage)</h6>
             </div>
             <div class="card-body p-0">
                 <?php if (empty($auslaufend)): ?>
@@ -83,8 +83,8 @@
     <?php if (! empty($ueberfaellig_rechnungen)): ?>
     <div class="col-12">
         <div class="card border-0 shadow-sm border-start border-danger border-4">
-            <div class="card-header bg-primary border-bottom-0 pt-3">
-                <h6 class="fw-semibold mb-0 text-warning"><i class="bi bi-exclamation-triangle-fill me-2"></i>Überfällige Eingangsrechnungen</h6>
+            <div class="card-header bg-primary text-white border-bottom-0 pt-3">
+                <h6 class="fw-semibold mb-0"><i class="bi bi-exclamation-triangle-fill text-white-50 me-2"></i>Überfällige Eingangsrechnungen</h6>
             </div>
             <div class="card-body p-0">
                 <table class="table table-hover mb-0">

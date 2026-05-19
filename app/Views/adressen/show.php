@@ -69,9 +69,9 @@ $anzeigename = $isFirma
     <!-- Kontaktdaten -->
     <div class="col-md-6">
         <div class="card border-0 shadow-sm h-100">
-            <div class="card-header bg-white border-bottom-0 pt-3">
+            <div class="card-header bg-primary text-white border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0">
-                    <i class="bi bi-telephone-fill text-primary me-2"></i>Kontakt
+                    <i class="bi bi-telephone-fill text-white-50 me-2"></i>Kontakt
                 </h6>
             </div>
             <div class="card-body">
@@ -113,9 +113,9 @@ $anzeigename = $isFirma
     <!-- Adresse -->
     <div class="col-md-6">
         <div class="card border-0 shadow-sm h-100">
-            <div class="card-header bg-white border-bottom-0 pt-3">
+            <div class="card-header bg-primary text-white border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0">
-                    <i class="bi bi-geo-alt-fill text-success me-2"></i>Adresse
+                    <i class="bi bi-geo-alt-fill text-white-50 me-2"></i>Adresse
                 </h6>
             </div>
             <div class="card-body">
@@ -142,9 +142,9 @@ $anzeigename = $isFirma
     <?php if ($adresse['iban'] || $adresse['bank']): ?>
     <div class="col-md-6">
         <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white border-bottom-0 pt-3">
+            <div class="card-header bg-primary text-white border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0">
-                    <i class="bi bi-bank2 text-warning me-2"></i>Bankdaten
+                    <i class="bi bi-bank2 text-white-50 me-2"></i>Bankdaten
                 </h6>
             </div>
             <div class="card-body">
@@ -167,9 +167,9 @@ $anzeigename = $isFirma
     <?php if ($adresse['bemerkungen']): ?>
     <div class="col-12">
         <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white border-bottom-0 pt-3">
+            <div class="card-header bg-primary text-white border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0">
-                    <i class="bi bi-chat-text me-2"></i>Bemerkungen
+                    <i class="bi bi-chat-text text-white-50 me-2"></i>Bemerkungen
                 </h6>
             </div>
             <div class="card-body text-muted">

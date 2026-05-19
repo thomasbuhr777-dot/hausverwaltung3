@@ -117,8 +117,8 @@
     <!-- Ausgaben nach Kategorie (laufendes Jahr) -->
     <div class="col-md-4">
         <div class="card h-100">
-            <div class="card-header bg-primary fw-semibold border-bottom-0 pt-3">
-                <i class="bi bi-pie-chart me-1"></i> Ausgaben <?= date('Y') ?>
+            <div class="card-header bg-primary text-white fw-semibold border-bottom-0 pt-3">
+                <i class="bi bi-pie-chart text-white-50 me-1"></i> Ausgaben <?= date('Y') ?>
             </div>
             <div class="card-body p-0">
                 <?php if (empty($ausgaben)): ?>
@@ -142,9 +142,9 @@
 
 <!-- Einheiten-Tabelle -->
 <div class="card mb-4">
-    <div class="card-header bg-primary border-bottom py-3 d-flex justify-content-between align-items-center">
+    <div class="card-header bg-primary text-white border-bottom py-3 d-flex justify-content-between align-items-center">
         <h6 class="fw-semibold mb-0">
-            <i class="bi bi-door-open me-2"></i>
+            <i class="bi bi-door-open text-white-50 me-2"></i>
             Einheiten (<?= count($objekt['einheiten']) ?>)
         </h6>
     </div>
@@ -207,9 +207,9 @@
 
 <!-- Eingangsrechnungen zum Objekt -->
 <div class="card">
-    <div class="card-header bg-primary py-3 d-flex justify-content-between align-items-center">
+    <div class="card-header bg-primary text-white py-3 d-flex justify-content-between align-items-center">
         <h6 class="fw-semibold mb-0">
-            <i class="bi bi-receipt me-2"></i>Eingangsrechnungen
+            <i class="bi bi-receipt text-white-50 me-2"></i>Eingangsrechnungen
         </h6>
         <a href="<?= base_url("eingangsrechnungen/neu?objekt_id={$objekt['id']}") ?>"
            class="btn btn-sm btn-outline-warning">

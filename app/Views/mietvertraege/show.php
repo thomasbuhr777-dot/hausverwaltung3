@@ -29,8 +29,8 @@
     <!-- Vertragsdaten -->
     <div class="col-md-6">
         <div class="card border-0 shadow-sm h-100">
-            <div class="card-header bg-white border-bottom-0 pt-3">
-                <h6 class="fw-semibold mb-0"><i class="bi bi-file-earmark-text-fill text-primary me-2"></i>Vertragsdaten</h6>
+            <div class="card-header bg-primary text-white border-bottom-0 pt-3">
+                <h6 class="fw-semibold mb-0"><i class="bi bi-file-earmark-text-fill text-white-50 me-2"></i>Vertragsdaten</h6>
             </div>
             <div class="card-body">
                 <dl class="row mb-0">
@@ -56,8 +56,8 @@
     <!-- Mieter & Finanzen -->
     <div class="col-md-6">
         <div class="card border-0 shadow-sm h-100">
-            <div class="card-header bg-white border-bottom-0 pt-3">
-                <h6 class="fw-semibold mb-0"><i class="bi bi-person-fill text-success me-2"></i>Mieter & Finanzen</h6>
+            <div class="card-header bg-primary text-white border-bottom-0 pt-3">
+                <h6 class="fw-semibold mb-0"><i class="bi bi-person-fill text-white-50 me-2"></i>Mieter & Finanzen</h6>
             </div>
             <div class="card-body">
                 <dl class="row mb-0">
@@ -111,8 +111,8 @@
 
 <!-- Zahlungsliste -->
 <div class="card border-0 shadow-sm">
-    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
-        <h6 class="fw-semibold mb-0"><i class="bi bi-cash-coin text-success me-2"></i>Zahlungshistorie</h6>
+    <div class="card-header bg-primary text-white border-bottom py-3 d-flex justify-content-between align-items-center">
+        <h6 class="fw-semibold mb-0"><i class="bi bi-cash-coin text-white-50 me-2"></i>Zahlungshistorie</h6>
         <a href="<?= base_url("zahlungen/neu?mietvertrag_id={$vertrag['id']}") ?>" class="btn btn-sm btn-success">
             <i class="bi bi-plus"></i> Zahlung erfassen
         </a>
@@ -122,7 +122,7 @@
     <?php else: ?>
         <div class="table-responsive">
             <table class="table table-hover mb-0">
-                <thead class="table-light">
+                <thead class="bg-primary text-white">
                     <tr><th>Datum</th><th>Typ</th><th>Referenz</th>
                         <th class="text-end">Betrag</th><th>Fällig</th><th>Status</th><th></th></tr>
                 </thead>

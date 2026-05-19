@@ -29,7 +29,7 @@
 <div class="card border-0 shadow-sm">
     <div class="table-responsive">
         <table class="table table-hover mb-0" id="vertraegeTable">
-            <thead class="table-light">
+            <thead class="bg-primary text-white">
                 <tr>
                     <th>Vertragsnr.</th>
                     <th>Mieter</th>

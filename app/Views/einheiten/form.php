@@ -174,7 +174,7 @@ $errors = session('errors') ?? [];
                             <?php foreach ($merkmal_gruppen as $kategorie => $merkmale): ?>
                                 <div class="col-12 col-lg-6 col-xl-4">
                                     <div class="card h-100 border shadow-none">
-                                        <div class="card-header py-2 bg-light">
+                                        <div class="card-header py-2 bg-primary text-white">
                                             <span class="fw-semibold small"><?= esc($kategorie) ?></span>
                                         </div>
                                         <div class="card-body py-2">

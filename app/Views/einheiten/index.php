@@ -21,7 +21,7 @@
 <div class="card border-0 shadow-sm">
     <div class="table-responsive">
         <table class="table table-hover mb-0">
-            <thead class="table-light">
+            <thead class="bg-primary text-white">
                 <tr>
                     <!-- class="text-end" -->
                     <th>Objekt</th>

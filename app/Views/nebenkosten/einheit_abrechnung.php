@@ -74,7 +74,7 @@
 
         <!-- Positionstabelle -->
         <table class="table table-bordered table-sm mb-4">
-            <thead class="table-light">
+            <thead class="bg-primary text-white">
                 <tr>
                     <th>Kostenart</th>
                     <th class="text-end">Gesamtkosten</th>

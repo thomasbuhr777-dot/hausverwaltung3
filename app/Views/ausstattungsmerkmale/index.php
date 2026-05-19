@@ -48,10 +48,10 @@ $categoryIcons = [
         <?php foreach ($gruppen as $kategorie => $merkmale): ?>
             <div class="col-12 col-lg-6 col-xl-4">
                 <div class="card h-100 shadow-sm">
-                    <div class="card-header">
+                    <div class="card-header bg-primary text-white">
                         <h2 class="h6 mb-0 d-flex align-items-center gap-2">
                             <?php if (isset($categoryIcons[$kategorie])): ?>
-                                <i class="<?= esc($categoryIcons[$kategorie]) ?>"></i>
+                                <i class="<?= esc($categoryIcons[$kategorie]) ?> text-white-50"></i>
                             <?php endif; ?>
                             <span>
                                 <?= esc($kategorie) ?>

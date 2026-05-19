@@ -52,9 +52,9 @@
         <!-- ---- Kopfdaten ---- -->
         <div class="col-12">
             <div class="card border-0 shadow-sm">
-                <div class="card-header bg-white border-bottom py-3">
+                <div class="card-header bg-primary text-white border-bottom py-3">
                     <h6 class="fw-semibold mb-0">
-                        <i class="bi bi-building text-primary me-2"></i>
+                        <i class="bi bi-building text-white-50 me-2"></i>
                         <?= esc($objekt['bezeichnung']) ?> – Abrechnung <?= $jahr ?>
                     </h6>
                 </div>
@@ -82,9 +82,9 @@
         <!-- ---- Kostenpositionen ---- -->
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm h-100">
-                <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+                <div class="card-header bg-primary text-white border-bottom py-3 d-flex justify-content-between align-items-center">
                     <h6 class="fw-semibold mb-0">
-                        <i class="bi bi-receipt text-warning me-2"></i>
+                        <i class="bi bi-receipt text-white-50 me-2"></i>
                         Kostenpositionen
                     </h6>
                     <button type="button" class="btn btn-sm btn-outline-success" onclick="positionHinzufuegen()">
@@ -93,7 +93,7 @@
                 </div>
                 <div class="card-body p-0">
                     <table class="table table-sm mb-0" id="positionenTable">
-                        <thead class="table-light">
+                        <thead class="bg-primary text-white">
                             <tr>
                                 <th>Bezeichnung</th>
                                 <th style="width:110px">Kategorie</th>
@@ -177,15 +177,15 @@
         <!-- ---- Einheiten ---- -->
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm h-100">
-                <div class="card-header bg-white border-bottom py-3">
+                <div class="card-header bg-primary text-white border-bottom py-3">
                     <h6 class="fw-semibold mb-0">
-                        <i class="bi bi-door-open-fill text-success me-2"></i>
+                        <i class="bi bi-door-open-fill text-white-50 me-2"></i>
                         Einheiten &amp; Vorauszahlungen
                     </h6>
                 </div>
                 <div class="card-body p-0">
                     <table class="table table-sm mb-0">
-                        <thead class="table-light">
+                        <thead class="bg-primary text-white">
                             <tr>
                                 <th>Einheit / Mieter</th>
                                 <th style="width:80px">m²</th>

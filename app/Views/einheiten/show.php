@@ -87,9 +87,9 @@
     <!-- Aktiver Mietvertrag / Leerstand -->
     <div class="col-md-6">
         <div class="card border-0  shadow-sm h-100">
-            <div class="card-header bg-primary border-bottom-0 pt-3">
+            <div class="card-header bg-primary text-white border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0">
-                    <i class="bi bi-file-earmark-text-fill text-primary me-2"></i>
+                    <i class="bi bi-file-earmark-text-fill text-white-50 me-2"></i>
                     Aktuelles Mietverhältnis
                 </h6>
             </div>
@@ -159,9 +159,9 @@
     <!-- Beschreibung + Stammdaten -->
     <div class="col-md-6">
         <div class="card border-0 shadow-sm h-100">
-            <div class="card-header bg-primary border-bottom-0 pt-3">
+            <div class="card-header bg-primary text-white border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0">
-                    <i class="bi bi-info-circle-fill text-info me-2"></i>
+                    <i class="bi bi-info-circle-fill text-white-50 me-2"></i>
                     Stammdaten
                 </h6>
             </div>
@@ -207,9 +207,9 @@
     <?php if (!empty($tags)): ?>
     <div class="col-12">
         <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white border-bottom py-3">
+            <div class="card-header bg-primary text-white border-bottom py-3">
                 <h6 class="fw-semibold mb-0">
-                    <i class="bi bi-tags-fill text-primary me-2"></i>
+                    <i class="bi bi-tags-fill text-white-50 me-2"></i>
                     Ausstattungsmerkmale
                 </h6>
             </div>
@@ -240,15 +240,15 @@
     <?php if (count($vertraege) > 1 || ($vertraege && ! $aktiverVertrag)): ?>
     <div class="col-12">
         <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white border-bottom py-3">
+            <div class="card-header bg-primary text-white border-bottom py-3">
                 <h6 class="fw-semibold mb-0">
-                    <i class="bi bi-clock-history text-secondary me-2"></i>
+                    <i class="bi bi-clock-history text-white-50 me-2"></i>
                     Vertragshistorie (<?= count($vertraege) ?>)
                 </h6>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover mb-0">
-                    <thead class="table-light">
+                    <thead class="bg-primary text-white">
                         <tr>
                             <th>Mieter</th>
                             <th>Vertragsnr.</th>

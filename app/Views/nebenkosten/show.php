@@ -115,15 +115,15 @@ $badgeClass = match($a['status']) {
     <!-- Kostenpositionen -->
     <div class="col-lg-5">
         <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white border-bottom py-3">
+            <div class="card-header bg-primary text-white border-bottom py-3">
                 <h6 class="fw-semibold mb-0">
-                    <i class="bi bi-receipt text-warning me-2"></i>
+                    <i class="bi bi-receipt text-white-50 me-2"></i>
                     Kostenpositionen (<?= count($a['positionen']) ?>)
                 </h6>
             </div>
             <div class="table-responsive">
                 <table class="table table-sm mb-0">
-                    <thead class="table-light">
+                    <thead class="bg-primary text-white">
                         <tr>
                             <th>Position</th>
                             <th>Schlüssel</th>
@@ -172,9 +172,9 @@ $badgeClass = match($a['status']) {
     <!-- Einheiten-Ergebnisse -->
     <div class="col-lg-7">
         <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white border-bottom py-3">
+            <div class="card-header bg-primary text-white border-bottom py-3">
                 <h6 class="fw-semibold mb-0">
-                    <i class="bi bi-door-open-fill text-success me-2"></i>
+                    <i class="bi bi-door-open-fill text-white-50 me-2"></i>
                     Abrechnung je Einheit
                 </h6>
             </div>
@@ -186,7 +186,7 @@ $badgeClass = match($a['status']) {
             <?php else: ?>
             <div class="table-responsive">
                 <table class="table table-hover mb-0">
-                    <thead class="table-light">
+                    <thead class="bg-primary text-white">
                         <tr>
                             <th>Einheit / Mieter</th>
                             <th class="text-end">m²</th>

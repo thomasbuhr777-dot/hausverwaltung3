@@ -34,9 +34,9 @@
     <!-- Linke Spalte: Rechnungsdaten -->
     <div class="col-md-6">
         <div class="card border-0 shadow-sm h-100">
-            <div class="card-header  border-bottom-0 pt-3">
+            <div class="card-header bg-primary text-white border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0">
-                    <i class="bi bi-receipt text-warning me-2"></i>Rechnungsdaten
+                    <i class="bi bi-receipt text-white-50 me-2"></i>Rechnungsdaten
                 </h6>
             </div>
             <div class="card-body">
@@ -85,9 +85,9 @@
     <!-- Rechte Spalte: Beträge & Zuweisung -->
     <div class="col-md-6">
         <div class="card border-0 shadow-sm mb-3">
-            <div class="card-header bg-primary border-bottom-0 pt-3">
+            <div class="card-header bg-primary text-white border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0">
-                    <i class="bi bi-cash-coin text-success me-2"></i>Beträge
+                    <i class="bi bi-cash-coin text-white-50 me-2"></i>Beträge
                 </h6>
             </div>
             <div class="card-body">
@@ -105,9 +105,9 @@
         </div>
 
         <div class="card border-0 shadow-sm">
-            <div class="card-header bg-primary border-bottom-0 pt-3">
+            <div class="card-header bg-primary text-white border-bottom-0 pt-3">
                 <h6 class="fw-semibold mb-0">
-                    <i class="bi bi-building text-info me-2"></i>Zuweisung
+                    <i class="bi bi-building text-white-50 me-2"></i>Zuweisung
                 </h6>
             </div>
             <div class="card-body">
@@ -144,8 +144,8 @@
     <?php if ($rechnung['beschreibung']): ?>
     <div class="col-12">
         <div class="card border-0 shadow-sm">
-            <div class="card-header bg-primary border-bottom-0 pt-3">
-                <h6 class="fw-semibold mb-0"><i class="bi bi-chat-text me-2"></i>Beschreibung</h6>
+            <div class="card-header bg-primary text-white border-bottom-0 pt-3">
+                <h6 class="fw-semibold mb-0"><i class="bi bi-chat-text text-white-50 me-2"></i>Beschreibung</h6>
             </div>
             <div class="card-body text-muted">
                 <?= nl2br(esc($rechnung['beschreibung'])) ?>
@@ -158,8 +158,8 @@
     <?php if ($rechnung['datei_pfad']): ?>
     <div class="col-12">
         <div class="card border-0 shadow-sm">
-            <div class="card-header bg-primary border-bottom-0 pt-3">
-                <h6 class="fw-semibold mb-0"><i class="bi bi-paperclip me-2"></i>Anhang</h6>
+            <div class="card-header bg-primary text-white border-bottom-0 pt-3">
+                <h6 class="fw-semibold mb-0"><i class="bi bi-paperclip text-white-50 me-2"></i>Anhang</h6>
             </div>
             <div class="card-body">
                 <a href="<?= base_url($rechnung['datei_pfad']) ?>" target="_blank" class="btn btn-outline-secondary btn-sm">
