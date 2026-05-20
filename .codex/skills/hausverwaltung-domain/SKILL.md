@@ -23,6 +23,16 @@ Berücksichtige die fachliche Struktur der Hausverwaltungsanwendung.
 - Belege
 - Abrechnungsrelevante Stammdaten
 
+## Neue Migrationen
+
+Neue Migrationen nur noch mit folgende Auditfeldern anlegen:
+
+- erstellt_am
+- updated_am
+- geloescht_am
+- erstellt_von
+- updated_von
+
 ## Adressen
 
 Die Tabelle `adressen` ist ein allgemeines Adressbuch.
@@ -47,11 +57,11 @@ Typische Felder:
 - steuer_id
 - bankverbindung
 - notizen
-- created_at
-- updated_at
-- deleted_at
-- created_by
-- updated_by
+- erstellt_am
+- updated_am
+- geloescht_am
+- erstellt_von
+- updated_von
 
 ## Wichtige Regeln
 
