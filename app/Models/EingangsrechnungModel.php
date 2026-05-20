@@ -27,12 +27,14 @@ class EingangsrechnungModel extends Model
         'status',
         'beschreibung',
         'datei_pfad',
+        'erstellt_von',
+        'updated_von',
     ];
 
     protected $useTimestamps = true;
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    protected $createdField  = 'erstellt_am';
+    protected $updatedField  = 'updated_am';
+    protected $deletedField  = 'geloescht_am';
 
     protected $validationRules = [
         'rechnungsnummer' => 'required|max_length[100]',
@@ -57,10 +59,10 @@ class EingangsrechnungModel extends Model
                       COALESCE(oe.strasse, oo.strasse) AS objekt_strasse,
                       COALESCE(oe.ort, oo.ort) AS objekt_ort,
                       e.bezeichnung AS einheit_bezeichnung')
-            ->join('einheiten e', 'e.id = er.einheit_id AND e.deleted_at IS NULL', 'left')
-            ->join('objekte oo', 'oo.id = er.objekt_id AND oo.deleted_at IS NULL', 'left')
-            ->join('objekte oe', 'oe.id = e.objekt_id AND oe.deleted_at IS NULL', 'left')
-            ->where('er.deleted_at IS NULL')
+            ->join('einheiten e', 'e.id = er.einheit_id AND e.geloescht_am IS NULL', 'left')
+            ->join('objekte oo', 'oo.id = er.objekt_id AND oo.geloescht_am IS NULL', 'left')
+            ->join('objekte oe', 'oe.id = e.objekt_id AND oe.geloescht_am IS NULL', 'left')
+            ->where('er.geloescht_am IS NULL')
             ->where('((er.einheit_id IS NULL AND oo.id IS NOT NULL) OR (er.einheit_id IS NOT NULL AND e.id IS NOT NULL AND oe.id IS NOT NULL))', null, false);
 
         if ($objektId !== null) {
@@ -87,10 +89,10 @@ class EingangsrechnungModel extends Model
                       SUM(er.nettobetrag) AS netto_gesamt,
                       SUM(er.bruttobetrag) AS brutto_gesamt,
                       COUNT(*) AS anzahl')
-            ->join('einheiten e', 'e.id = er.einheit_id AND e.deleted_at IS NULL', 'left')
-            ->join('objekte oo', 'oo.id = er.objekt_id AND oo.deleted_at IS NULL', 'left')
-            ->join('objekte oe', 'oe.id = e.objekt_id AND oe.deleted_at IS NULL', 'left')
-            ->where('er.deleted_at IS NULL')
+            ->join('einheiten e', 'e.id = er.einheit_id AND e.geloescht_am IS NULL', 'left')
+            ->join('objekte oo', 'oo.id = er.objekt_id AND oo.geloescht_am IS NULL', 'left')
+            ->join('objekte oe', 'oe.id = e.objekt_id AND oe.geloescht_am IS NULL', 'left')
+            ->where('er.geloescht_am IS NULL')
             ->groupStart()
                 ->groupStart()
                     ->where('er.einheit_id IS NULL')
@@ -131,12 +133,12 @@ class EingangsrechnungModel extends Model
     {
         return $this->db->table('eingangsrechnungen er')
             ->select('er.*, COALESCE(oe.bezeichnung, oo.bezeichnung) AS objekt_bezeichnung, e.bezeichnung AS einheit_bezeichnung')
-            ->join('einheiten e', 'e.id = er.einheit_id AND e.deleted_at IS NULL', 'left')
-            ->join('objekte oo', 'oo.id = er.objekt_id AND oo.deleted_at IS NULL', 'left')
-            ->join('objekte oe', 'oe.id = e.objekt_id AND oe.deleted_at IS NULL', 'left')
+            ->join('einheiten e', 'e.id = er.einheit_id AND e.geloescht_am IS NULL', 'left')
+            ->join('objekte oo', 'oo.id = er.objekt_id AND oo.geloescht_am IS NULL', 'left')
+            ->join('objekte oe', 'oe.id = e.objekt_id AND oe.geloescht_am IS NULL', 'left')
             ->where('er.status', 'offen')
             ->where('er.faellig_datum <', date('Y-m-d'))
-            ->where('er.deleted_at IS NULL')
+            ->where('er.geloescht_am IS NULL')
             ->where('((er.einheit_id IS NULL AND oo.id IS NOT NULL) OR (er.einheit_id IS NOT NULL AND e.id IS NOT NULL AND oe.id IS NOT NULL))', null, false)
             ->orderBy('er.faellig_datum', 'ASC')
             ->get()

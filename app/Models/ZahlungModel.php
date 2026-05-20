@@ -21,12 +21,16 @@ class ZahlungModel extends Model
         'status',
         'referenz',
         'notizen',
+        'erstellt_am',
+        'updated_am',
+        'erstellt_von',
+        'updated_von',
     ];
 
     protected $useTimestamps = true;
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    protected $createdField  = 'erstellt_am';
+    protected $updatedField  = 'updated_am';
+    protected $deletedField  = 'geloescht_am';
 
     protected $validationRules = [
         'mietvertrag_id' => 'required|integer',
@@ -48,10 +52,10 @@ class ZahlungModel extends Model
             ->select('z.*, mv.mieter_name, mv.mieter_vorname,
                       e.bezeichnung AS einheit_bezeichnung,
                       o.bezeichnung AS objekt_bezeichnung')
-            ->join('mietvertraege mv', 'mv.id = z.mietvertrag_id AND mv.deleted_at IS NULL', 'inner')
-            ->join('einheiten e', 'e.id = mv.einheit_id AND e.deleted_at IS NULL', 'inner')
-            ->join('objekte o', 'o.id = e.objekt_id AND o.deleted_at IS NULL', 'inner')
-            ->where('z.deleted_at IS NULL');
+            ->join('mietvertraege mv', 'mv.id = z.mietvertrag_id AND mv.geloescht_am IS NULL', 'inner')
+            ->join('einheiten e', 'e.id = mv.einheit_id AND e.geloescht_am IS NULL', 'inner')
+            ->join('objekte o', 'o.id = e.objekt_id AND o.geloescht_am IS NULL', 'inner')
+            ->where('z.geloescht_am IS NULL');
 
         if ($mietvertragId !== null) {
             $builder->where('z.mietvertrag_id', $mietvertragId);
@@ -68,7 +72,7 @@ class ZahlungModel extends Model
         return $this->db->table('zahlungen')
             ->where('status', 'offen')
             ->where('faellig_datum <', date('Y-m-d'))
-            ->where('deleted_at IS NULL')
+            ->where('geloescht_am IS NULL')
             ->update(['status' => 'ueberfaellig']);
     }
 
@@ -82,12 +86,12 @@ class ZahlungModel extends Model
                       SUM(z.betrag) AS gesamt,
                       SUM(CASE WHEN z.typ = "miete" THEN z.betrag ELSE 0 END) AS miete,
                       SUM(CASE WHEN z.typ = "nebenkosten" THEN z.betrag ELSE 0 END) AS nebenkosten')
-            ->join('mietvertraege mv', 'mv.id = z.mietvertrag_id AND mv.deleted_at IS NULL', 'inner')
-            ->join('einheiten e', 'e.id = mv.einheit_id AND e.deleted_at IS NULL', 'inner')
-            ->join('objekte o', 'o.id = e.objekt_id AND o.deleted_at IS NULL', 'inner')
+            ->join('mietvertraege mv', 'mv.id = z.mietvertrag_id AND mv.geloescht_am IS NULL', 'inner')
+            ->join('einheiten e', 'e.id = mv.einheit_id AND e.geloescht_am IS NULL', 'inner')
+            ->join('objekte o', 'o.id = e.objekt_id AND o.geloescht_am IS NULL', 'inner')
             ->where('YEAR(z.datum)', $jahr)
             ->where('z.status', 'bezahlt')
-            ->where('z.deleted_at IS NULL')
+            ->where('z.geloescht_am IS NULL')
             ->groupBy('YEAR(z.datum), MONTH(z.datum)')
             ->orderBy('monat', 'ASC')
             ->get()
@@ -114,8 +118,8 @@ class ZahlungModel extends Model
                 'typ'            => 'miete',
                 'status'         => 'offen',
                 'referenz'       => 'Miete ' . $datum->format('M Y'),
-                'created_at'     => date('Y-m-d H:i:s'),
-                'updated_at'     => date('Y-m-d H:i:s'),
+                'erstellt_am'     => date('Y-m-d H:i:s'),
+                'updated_am'     => date('Y-m-d H:i:s'),
             ];
         }
 

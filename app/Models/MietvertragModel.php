@@ -26,12 +26,14 @@ class MietvertragModel extends Model
         'zahlungstag',
         'status',
         'notizen',
+        'erstellt_von',
+        'updated_von',
     ];
 
     protected $useTimestamps = true;
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    protected $createdField  = 'erstellt_am';
+    protected $updatedField  = 'updated_am';
+    protected $deletedField  = 'geloescht_am';
 
     protected $validationRules = [
         'einheit_id'  => 'required|integer',
@@ -54,7 +56,7 @@ class MietvertragModel extends Model
     {
         $year  = date('Y');
         $count = $this->db->table('mietvertraege')
-            ->where('YEAR(created_at)', $year)
+            ->where('YEAR(erstellt_am)', $year)
             ->countAllResults();
 
         return sprintf('MV-%s-%04d', $year, $count + 1);
@@ -70,9 +72,9 @@ class MietvertragModel extends Model
                       o.id AS objekt_id, o.bezeichnung AS objekt_bezeichnung,
                       o.strasse, o.hausnummer, o.plz, o.ort,
                       (mv.kaltmiete + mv.nebenkosten) AS warmmiete')
-            ->join('einheiten e', 'e.id = mv.einheit_id AND e.deleted_at IS NULL', 'inner')
-            ->join('objekte o', 'o.id = e.objekt_id AND o.deleted_at IS NULL', 'inner')
-            ->where('mv.deleted_at IS NULL');
+            ->join('einheiten e', 'e.id = mv.einheit_id AND e.geloescht_am IS NULL', 'inner')
+            ->join('objekte o', 'o.id = e.objekt_id AND o.geloescht_am IS NULL', 'inner')
+            ->where('mv.geloescht_am IS NULL');
 
         if ($einheitId !== null) {
             $builder->where('mv.einheit_id', $einheitId);
@@ -92,10 +94,10 @@ class MietvertragModel extends Model
         $vertrag = $this->db->table('mietvertraege mv')
             ->select('mv.*, e.bezeichnung AS einheit_bezeichnung,
                       o.bezeichnung AS objekt_bezeichnung, o.strasse, o.ort')
-            ->join('einheiten e', 'e.id = mv.einheit_id AND e.deleted_at IS NULL')
-            ->join('objekte o', 'o.id = e.objekt_id AND o.deleted_at IS NULL')
+            ->join('einheiten e', 'e.id = mv.einheit_id AND e.geloescht_am IS NULL')
+            ->join('objekte o', 'o.id = e.objekt_id AND o.geloescht_am IS NULL')
             ->where('mv.id', $id)
-            ->where('mv.deleted_at IS NULL')
+            ->where('mv.geloescht_am IS NULL')
             ->get()
             ->getRowArray();
 
@@ -130,12 +132,12 @@ class MietvertragModel extends Model
     {
         return $this->db->table('mietvertraege mv')
             ->select('mv.*, e.bezeichnung AS einheit_bezeichnung, o.bezeichnung AS objekt_bezeichnung')
-            ->join('einheiten e', 'e.id = mv.einheit_id AND e.deleted_at IS NULL')
-            ->join('objekte o', 'o.id = e.objekt_id AND o.deleted_at IS NULL')
+            ->join('einheiten e', 'e.id = mv.einheit_id AND e.geloescht_am IS NULL')
+            ->join('objekte o', 'o.id = e.objekt_id AND o.geloescht_am IS NULL')
             ->where('mv.status', 'aktiv')
             ->where('mv.ende_datum IS NOT NULL')
             ->where("mv.ende_datum <= DATE_ADD(NOW(), INTERVAL {$tage} DAY)")
-            ->where('mv.deleted_at IS NULL')
+            ->where('mv.geloescht_am IS NULL')
             ->orderBy('mv.ende_datum', 'ASC')
             ->get()
             ->getResultArray();

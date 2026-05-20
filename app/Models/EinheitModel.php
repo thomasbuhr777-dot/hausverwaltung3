@@ -22,12 +22,14 @@ class EinheitModel extends Model
         'zimmer',
         'beschreibung',
         'status',
+        'erstellt_von',
+        'updated_von',
     ];
 
     protected $useTimestamps = true;
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    protected $createdField  = 'erstellt_am';
+    protected $updatedField  = 'updated_am';
+    protected $deletedField  = 'geloescht_am';
 
     protected $validationRules = [
         'objekt_id'            => 'required|integer|is_not_unique[objekte.id]',
@@ -60,9 +62,9 @@ class EinheitModel extends Model
             ->join('objekte o', 'o.id = e.objekt_id', 'left')
             ->join('einheitenarten ea', 'ea.id = e.einheitenart_id', 'left')
             ->join('einheitenlage lg', 'lg.id = e.einheitenlage_id', 'left')
-            ->join('mietvertraege mv', 'mv.einheit_id = e.id AND mv.status = "aktiv" AND mv.deleted_at IS NULL', 'left')
-            ->where('e.deleted_at IS NULL')
-            ->where('o.deleted_at IS NULL');
+            ->join('mietvertraege mv', 'mv.einheit_id = e.id AND mv.status = "aktiv" AND mv.geloescht_am IS NULL', 'left')
+            ->where('e.geloescht_am IS NULL')
+            ->where('o.geloescht_am IS NULL');
 
         if ($objektId !== null) {
             $builder->where('e.objekt_id', $objektId);
@@ -101,9 +103,9 @@ class EinheitModel extends Model
     {
         return $this->db->table('einheiten e')
             ->select('e.*, ea.bezeichnung AS einheitenart_bezeichnung')
-            ->join('objekte o', 'o.id = e.objekt_id AND o.deleted_at IS NULL', 'inner')
+            ->join('objekte o', 'o.id = e.objekt_id AND o.geloescht_am IS NULL', 'inner')
             ->join('einheitenarten ea', 'ea.id = e.einheitenart_id', 'left')
-            ->where('e.deleted_at IS NULL');
+            ->where('e.geloescht_am IS NULL');
     }
 
 }

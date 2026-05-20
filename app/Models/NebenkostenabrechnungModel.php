@@ -11,13 +11,14 @@ class NebenkostenabrechnungModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = true;
     protected $useTimestamps  = true;
-    protected $createdField   = 'created_at';
-    protected $updatedField   = 'updated_at';
-    protected $deletedField   = 'deleted_at';
+    protected $createdField   = 'erstellt_am';
+    protected $updatedField   = 'updated_am';
+    protected $deletedField   = 'geloescht_am';
 
     protected $allowedFields = [
         'objekt_id', 'bezeichnung', 'jahr',
         'zeitraum_von', 'zeitraum_bis', 'status', 'notizen',
+        'erstellt_von', 'updated_von',
     ];
 
     protected $validationRules = [
@@ -41,10 +42,10 @@ class NebenkostenabrechnungModel extends Model
                       COUNT(DISTINCT p.id) AS anzahl_positionen,
                       COUNT(DISTINCT e.id) AS anzahl_einheiten,
                       SUM(p.gesamtbetrag)  AS kosten_gesamt')
-            ->join('objekte o',               'o.id = a.objekt_id AND o.deleted_at IS NULL', 'inner')
+            ->join('objekte o',               'o.id = a.objekt_id AND o.geloescht_am IS NULL', 'inner')
             ->join('nebenkostenpositionen p', 'p.abrechnung_id = a.id', 'left')
             ->join('nk_einheiten e',          'e.abrechnung_id = a.id', 'left')
-            ->where('a.deleted_at IS NULL')
+            ->where('a.geloescht_am IS NULL')
             ->groupBy('a.id')
             ->orderBy('a.jahr', 'DESC')
             ->orderBy('o.bezeichnung', 'ASC');
@@ -64,9 +65,9 @@ class NebenkostenabrechnungModel extends Model
         $abrechnung = $this->db->table('nebenkostenabrechnungen a')
             ->select('a.*, o.bezeichnung AS objekt_bezeichnung,
                       o.strasse, o.hausnummer, o.plz, o.ort')
-            ->join('objekte o', 'o.id = a.objekt_id AND o.deleted_at IS NULL')
+            ->join('objekte o', 'o.id = a.objekt_id AND o.geloescht_am IS NULL')
             ->where('a.id', $id)
-            ->where('a.deleted_at IS NULL')
+            ->where('a.geloescht_am IS NULL')
             ->get()->getRowArray();
 
         if (! $abrechnung) {
@@ -84,7 +85,7 @@ class NebenkostenabrechnungModel extends Model
         $abrechnung['einheiten'] = $this->db->table('nk_einheiten e')
             ->select('e.*, ei.bezeichnung AS einheit_bezeichnung,
                       er.kosten_gesamt, er.vorauszahlungen_gesamt, er.saldo')
-            ->join('einheiten ei', 'ei.id = e.einheit_id AND ei.deleted_at IS NULL', 'left')
+            ->join('einheiten ei', 'ei.id = e.einheit_id AND ei.geloescht_am IS NULL', 'left')
             ->join('nk_ergebnisse er', 'er.nk_einheit_id = e.id', 'left')
             ->where('e.abrechnung_id', $id)
             ->orderBy('ei.bezeichnung', 'ASC')

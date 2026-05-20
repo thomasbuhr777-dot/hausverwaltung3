@@ -41,10 +41,10 @@ class NebenkostenberechnungService
             ->join('mietvertraege mv',
                 'mv.einheit_id = e.id
                  AND mv.status = "aktiv"
-                 AND mv.deleted_at IS NULL',
+                 AND mv.geloescht_am IS NULL',
                 'inner')
             ->where('e.objekt_id', $objektId)
-            ->where('e.deleted_at IS NULL')
+            ->where('e.geloescht_am IS NULL')
             ->where('mv.beginn_datum <=', $bis)
             ->groupStart()
                 ->where('mv.ende_datum IS NULL')
@@ -64,7 +64,7 @@ class NebenkostenberechnungService
                     ->where('status', 'bezahlt')
                     ->where('datum >=', $von)
                     ->where('datum <=', $bis)
-                    ->where('deleted_at IS NULL')
+                    ->where('geloescht_am IS NULL')
                     ->get()->getRowArray();
 
                 $e['vorauszahlungen_gesamt'] = (float) ($result['summe'] ?? 0);
@@ -105,7 +105,7 @@ class NebenkostenberechnungService
                       er.rechnungsdatum, er.objekt_id, er.einheit_id,
                       e.objekt_id AS einheit_objekt_id')
             ->join('einheiten e', 'e.id = er.einheit_id', 'left')
-            ->where('er.deleted_at IS NULL')
+            ->where('er.geloescht_am IS NULL')
             ->where('er.rechnungsdatum >=', $von)
             ->where('er.rechnungsdatum <=', $bis)
             ->groupStart()
@@ -236,8 +236,8 @@ class NebenkostenberechnungService
                     'anteil_prozent'       => round($prozent, 4),
                     'anteil_betrag'        => $betrag,
                     'berechnungsgrundlage' => $grundlage,
-                    'created_at'           => date('Y-m-d H:i:s'),
-                    'updated_at'           => date('Y-m-d H:i:s'),
+                    'erstellt_am'           => date('Y-m-d H:i:s'),
+                    'updated_am'           => date('Y-m-d H:i:s'),
                 ];
 
                 $ergebnisse[$e['id']]['kosten_gesamt'] += $betrag;
@@ -254,8 +254,8 @@ class NebenkostenberechnungService
 
         foreach ($ergebnisse as &$erg) {
             $erg['saldo']      = round($erg['kosten_gesamt'] - $erg['vorauszahlungen_gesamt'], 2);
-            $erg['created_at'] = date('Y-m-d H:i:s');
-            $erg['updated_at'] = date('Y-m-d H:i:s');
+            $erg['erstellt_am'] = date('Y-m-d H:i:s');
+            $erg['updated_am'] = date('Y-m-d H:i:s');
         }
 
         $this->db->table('nk_ergebnisse')->insertBatch(array_values($ergebnisse));
@@ -263,7 +263,7 @@ class NebenkostenberechnungService
         // Abrechnung auf "fertig" setzen
         $this->db->table('nebenkostenabrechnungen')
             ->where('id', $abrechnungId)
-            ->update(['status' => 'fertig', 'updated_at' => date('Y-m-d H:i:s')]);
+            ->update(['status' => 'fertig', 'updated_am' => date('Y-m-d H:i:s')]);
 
         $log[] = 'Berechnung abgeschlossen.';
         return ['success' => true, 'log' => $log];

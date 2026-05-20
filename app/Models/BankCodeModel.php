@@ -10,6 +10,8 @@ class BankCodeModel extends Model
     protected $primaryKey       = 'id';
     protected $returnType       = 'array';
     protected $useTimestamps    = true;
+    protected $createdField     = 'erstellt_am';
+    protected $updatedField     = 'updated_am';
 
     protected $allowedFields = [
         'bank_code',
@@ -18,5 +20,7 @@ class BankCodeModel extends Model
         'city',
         'bic',
         'is_primary',
+        'erstellt_von',
+        'updated_von',
     ];
 }

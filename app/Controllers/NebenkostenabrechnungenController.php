@@ -138,8 +138,8 @@ class NebenkostenabrechnungenController extends BaseController
                     ? json_encode($p['eingangsrechnung_ids'])
                     : null,
                 'sortierung'           => (int) ($p['sortierung'] ?? 0),
-                'created_at'           => date('Y-m-d H:i:s'),
-                'updated_at'           => date('Y-m-d H:i:s'),
+                'erstellt_am'           => date('Y-m-d H:i:s'),
+                'updated_am'           => date('Y-m-d H:i:s'),
             ]);
         }
 
@@ -159,8 +159,8 @@ class NebenkostenabrechnungenController extends BaseController
                 'wohnflaeche'            => (float) ($e['wohnflaeche'] ?? 0),
                 'personenanzahl'         => (int)   ($e['personenanzahl'] ?? 1),
                 'vorauszahlungen_gesamt' => (float) ($e['vorauszahlungen_gesamt'] ?? 0),
-                'created_at'             => date('Y-m-d H:i:s'),
-                'updated_at'             => date('Y-m-d H:i:s'),
+                'erstellt_am'             => date('Y-m-d H:i:s'),
+                'updated_am'             => date('Y-m-d H:i:s'),
             ]);
         }
 

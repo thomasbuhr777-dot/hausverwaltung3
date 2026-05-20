@@ -17,13 +17,18 @@ class AusstattungsmerkmalModel extends Model
         'icon',
         'sortierung',
         'aktiv',
-        'created_at',
-        'updated_at',
-        'deleted_at',
+        'erstellt_am',
+        'updated_am',
+        'geloescht_am',
+        'erstellt_von',
+        'updated_von',
     ];
 
     protected $useTimestamps = true;
     protected $useSoftDeletes = true;
+    protected $createdField  = 'erstellt_am';
+    protected $updatedField  = 'updated_am';
+    protected $deletedField  = 'geloescht_am';
 
     public function getGrouped(): array
     {

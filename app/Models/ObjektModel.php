@@ -11,7 +11,7 @@
  *    Außerdem werden Einheiten jetzt nach `bezeichnung` sortiert zurückgegeben.
  *  - `getMonatsmieteByObjekt()`: war vorhanden aber wurde im Controller nie
  *    aufgerufen – bleibt erhalten, da sie sinnvoll ist; PHPDoc ergänzt.
- *  - `$allowedFields`: 'created_by' / 'updated_by' ergänzt, da die DB-Spalten
+ *  - `$allowedFields`: 'erstellt_von' / 'updated_von' ergänzt, da die DB-Spalten
  *    existieren und andernfalls nicht über das Model befüllt werden können.
  *  - Validierungsregel für `status`: war `in_list[aktiv,inaktiv]` ohne
  *    `permit_empty` – das führt zu einem Fehler, wenn der Wert leer gesendet
@@ -47,8 +47,8 @@ class ObjektModel extends Model
         'gesamtflaeche',
         'beschreibung',
         'status',
-        'created_by',   // NEU: war bisher nicht in allowedFields
-        'updated_by',   // NEU: war bisher nicht in allowedFields
+        'erstellt_von',   // NEU: war bisher nicht in allowedFields
+        'updated_von',   // NEU: war bisher nicht in allowedFields
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -56,9 +56,9 @@ class ObjektModel extends Model
 
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    protected $createdField  = 'erstellt_am';
+    protected $updatedField  = 'updated_am';
+    protected $deletedField  = 'geloescht_am';
 
     // -------------------------------------------------------------------------
     // Validation
@@ -129,7 +129,7 @@ class ObjektModel extends Model
     /**
      * Alle Objekte mit aggregierten Einheiten-Statistiken.
      *
-     * FIX: Soft-Delete-Filter für `objektarten` ergänzt (oa.deleted_at IS NULL),
+     * FIX: Soft-Delete-Filter für `objektarten` ergänzt (oa.geloescht_am IS NULL),
      * damit gelöschte Objektarten nicht fälschlich angezeigt werden.
      *
      * @return array<int, array<string, mixed>>
@@ -144,9 +144,9 @@ class ObjektModel extends Model
                 SUM(CASE WHEN e.status = "vermietet"  THEN 1 ELSE 0 END)     AS vermietete_einheiten,
                 SUM(CASE WHEN e.status = "verfuegbar" THEN 1 ELSE 0 END)     AS freie_einheiten
             ')
-            ->join('objektarten oa', 'oa.id = o.objektart_id AND oa.deleted_at IS NULL', 'left')
-            ->join('einheiten e',    'e.objekt_id = o.id AND e.deleted_at IS NULL',      'left')
-            ->where('o.deleted_at IS NULL')
+            ->join('objektarten oa', 'oa.id = o.objektart_id AND oa.geloescht_am IS NULL', 'left')
+            ->join('einheiten e',    'e.objekt_id = o.id AND e.geloescht_am IS NULL',      'left')
+            ->where('o.geloescht_am IS NULL')
             ->groupBy('o.id')
             ->orderBy('o.bezeichnung', 'ASC')
             ->get()
@@ -162,9 +162,9 @@ class ObjektModel extends Model
     {
         $objekt = $this->db->table('objekte o')
             ->select('o.*, oa.bezeichnung AS objektart_bezeichnung')
-            ->join('objektarten oa', 'oa.id = o.objektart_id AND oa.deleted_at IS NULL', 'left')
+            ->join('objektarten oa', 'oa.id = o.objektart_id AND oa.geloescht_am IS NULL', 'left')
             ->where('o.id', $id)
-            ->where('o.deleted_at IS NULL')
+            ->where('o.geloescht_am IS NULL')
             ->get()
             ->getRowArray();
 
@@ -176,9 +176,9 @@ class ObjektModel extends Model
         // und unnötige Kopplung an EinheitModel zu vermeiden.
         $objekt['einheiten'] = $this->db->table('einheiten e')
             ->select('e.*, ea.bezeichnung AS einheitenart_bezeichnung')
-            ->join('einheitenarten ea', 'ea.id = e.einheitenart_id AND ea.deleted_at IS NULL', 'left')
+            ->join('einheitenarten ea', 'ea.id = e.einheitenart_id AND ea.geloescht_am IS NULL', 'left')
             ->where('e.objekt_id', $id)
-            ->where('e.deleted_at IS NULL')
+            ->where('e.geloescht_am IS NULL')
             ->orderBy('e.bezeichnung', 'ASC')
             ->get()
             ->getResultArray();
@@ -199,7 +199,7 @@ class ObjektModel extends Model
             ->join('einheiten e', 'e.id = mv.einheit_id')
             ->where('e.objekt_id', $id)
             ->where('mv.status', 'aktiv')
-            ->where('mv.deleted_at IS NULL')
+            ->where('mv.geloescht_am IS NULL')
             ->get()
             ->getRowArray();
 

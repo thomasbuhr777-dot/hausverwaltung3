@@ -157,9 +157,9 @@ class AusstattungsmerkmaleSeeder extends Seeder
                 'icon'        => $item[3],
                 'sortierung'  => $index + 1,
                 'aktiv'       => 1,
-                'created_at'  => $now,
-                'updated_at'  => $now,
-                'deleted_at'  => null,
+                'erstellt_am'  => $now,
+                'updated_am'  => $now,
+                'geloescht_am'  => null,
             ];
         }
 

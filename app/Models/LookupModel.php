@@ -12,18 +12,18 @@ class LookupModel extends Model
     protected $returnType       = 'array';
 
     protected $useSoftDeletes = true;
-    protected $deletedField   = 'deleted_at';
+    protected $deletedField   = 'geloescht_am';
 
     protected $useTimestamps = true;
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
+    protected $createdField  = 'erstellt_am';
+    protected $updatedField  = 'updated_am';
 
     protected $allowedFields = [
         'bezeichnung',
         'sortierung',
         'aktiv',
-        'created_by',
-        'updated_by',
+        'erstellt_von',
+        'updated_von',
     ];
 
     protected $validationRules = [
@@ -113,8 +113,8 @@ class LookupModel extends Model
                 ->where('id', $id)
                 ->update([
                     'sortierung' => $position,
-                    'updated_at' => date('Y-m-d H:i:s'),
-                    'updated_by' => function_exists('auth') && auth()->id() ? auth()->id() : null,
+                    'updated_am' => date('Y-m-d H:i:s'),
+                    'updated_von' => function_exists('auth') && auth()->id() ? auth()->id() : null,
                 ]);
 
             $position++;
@@ -137,7 +137,7 @@ class LookupModel extends Model
     protected function injectCreatedBy(array $data): array
     {
         if (function_exists('auth') && auth()->id()) {
-            $data['data']['created_by'] = auth()->id();
+            $data['data']['erstellt_von'] = auth()->id();
         }
 
         return $data;
@@ -146,7 +146,7 @@ class LookupModel extends Model
     protected function injectUpdatedBy(array $data): array
     {
         if (function_exists('auth') && auth()->id()) {
-            $data['data']['updated_by'] = auth()->id();
+            $data['data']['updated_von'] = auth()->id();
         }
 
         return $data;

@@ -14,12 +14,14 @@ class EinheitenartModel extends Model
 
     protected $allowedFields = [
         'bezeichnung',
+        'erstellt_von',
+        'updated_von',
     ];
 
     protected $useTimestamps = true;
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    protected $createdField  = 'erstellt_am';
+    protected $updatedField  = 'updated_am';
+    protected $deletedField  = 'geloescht_am';
 
     protected $validationRules = [
         'bezeichnung' => 'required|min_length[1]|max_length[100]',
@@ -30,7 +32,7 @@ class EinheitenartModel extends Model
      */
     public function getAsList(): array
     {
-        $rows = $this->where('deleted_at IS NULL')
+        $rows = $this->where('geloescht_am IS NULL')
             ->where('aktiv', 1)
             ->orderBy('sortierung', 'ASC')
             ->orderBy('bezeichnung', 'ASC')

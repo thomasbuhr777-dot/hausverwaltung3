@@ -15,10 +15,11 @@ class EinheitTagModel extends Model
     protected $allowedFields = [
         'einheit_id',
         'ausstattungsmerkmal_id',
+        'erstellt_am',
     ];
 
     protected $useTimestamps = false;
-    protected $createdField  = 'created_at';
+    protected $createdField  = 'erstellt_am';
     protected $updatedField  = null;
     protected $deletedField  = null;
 
@@ -31,7 +32,7 @@ class EinheitTagModel extends Model
             ->select('am.id, am.bezeichnung, am.icon, am.kategorie')
             ->join('ausstattungsmerkmale am', 'am.id = et.ausstattungsmerkmal_id')
             ->where('et.einheit_id', $einheitId)
-            ->where('am.deleted_at IS NULL')
+            ->where('am.geloescht_am IS NULL')
             ->orderBy('am.kategorie', 'ASC')
             ->orderBy('am.sortierung', 'ASC')
             ->get()
@@ -76,7 +77,7 @@ class EinheitTagModel extends Model
             $rows[] = [
                 'einheit_id'             => $einheitId,
                 'ausstattungsmerkmal_id' => $mid,
-                'created_at'             => $now,
+                'erstellt_am'             => $now,
             ];
         }
         $this->insertBatch($rows);
